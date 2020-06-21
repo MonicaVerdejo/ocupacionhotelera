@@ -1,0 +1,132 @@
+
+body {
+	margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.content-seccion{
+  display: flex;
+  flex-direction: row;
+}
+
+.content-seccion .content-img{
+  background-image: url('../../public/img/cover1.png');
+  background-position: center;
+  background-size: cover;
+  height:100vh;
+  width: 50%;
+}
+
+.content-seccion .content-form{
+  margin-left: 10%;
+}
+
+.content-seccion .content-form .content-logo{
+  display: flex;
+  justify-content: center;
+}
+
+.content-seccion .content-form .content-logo img{
+  width: 260px;
+  height: 300px;
+}
+
+.content-seccion .content-form  form .user,
+.content-seccion .content-form  form .pass,
+.content-seccion .content-form  form .content-crear{
+  padding: 5px 0 5px 0;
+}
+
+.content-seccion .content-form  form .recu{
+  padding: 5px 0 40px 0;
+}
+
+.content-seccion .content-form  form div input{
+	margin: 0;
+	width: 100%;
+  padding: 7px;
+	background-color: #FAFAFA;
+	border:1px solid #EFEFEF;
+}
+
+.content-seccion .content-form  form .recu{
+display: flex;
+flex-direction: row-reverse;
+
+}
+.content-seccion .content-form  form .recu a{
+  color: #019303;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.content-form .boton {
+		display: flex;
+		position: relative;
+		width: 260px;
+}
+.content-form .boton .btn {
+	  background: none;
+		border-top-left-radius:5px;
+		border-bottom-left-radius:5px;
+    border: 0.5px solid black;
+		padding: 15px 0 15px 0px;
+		text-transform: uppercase;
+    color: black;
+    width: 90%;
+		cursor: pointer;
+}
+.content-form .boton .btn2 {
+	  background: none;
+		border-top-right-radius:5px;
+		border-bottom-right-radius:5px;
+    border-top: 0.5px solid black;
+		border-bottom: 0.5px solid black;
+		border-right: 0.5px solid black;
+    width: 10%;
+		cursor: pointer;
+}
+
+.boton .btn::before {
+		border-top-right-radius:5px;
+		border-bottom-right-radius:5px;
+		border-top-left-radius:5px;
+		border-bottom-left-radius:5px;
+	  content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: #01930B;
+		z-index: -1;
+		transition: transform 1s;
+		transform-origin: 0 0;
+		transition-timing-function: cubic-bezier(0,5,1.6,0.4,0.7);
+}
+
+.boton .btn.bot::before {
+	transform:  scaleX(0);
+}
+
+.boton .btn.bot:hover::before {
+	transform:  scaleX(1);
+}
+
+.content-seccion .content-form  form .content-crear{
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+.content-seccion .content-form  form .content-crear div p{
+  color: #8C8E8C;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+}
+.content-seccion .content-form  form .content-crear div a{
+  color: #019303;
+  text-decoration: none;
+  font-size: 15px;
+}
