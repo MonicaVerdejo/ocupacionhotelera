@@ -1,3 +1,9 @@
+<?php 
+include_once 'db.php';
+include_once 'procesar_grafica.php';
+$db = new DB();
+?>
+
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -23,6 +29,7 @@
   <main>
 
     <div class="page-wrapper chiller-theme toggled">
+
 
       <!--Sidebar-->
       <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
@@ -82,10 +89,10 @@
 
                             if ($row[0] != 'Administrador') {
                             ?>> <?php echo $row[0];
-                              } else {
-                                ?> style="display: none;" > <?php
-                                                          }
-                                                            ?></a>
+                                                      } else {
+                                                        ?> style="display: none;" > <?php
+                                                                                  }
+                                                                                    ?></a>
                       <?php
                       }
                       ?>
@@ -109,8 +116,6 @@
           <!-- sidebar-content  -->
       </nav>
       <!-- Sidebar end -->
-
-
       <main class="page-content">
         <div class="container-fluid">
           <h2>Graficas</h2>
@@ -179,7 +184,7 @@
                     ],
                     borderWidth: 2,
 
-                    data: [<?php include_once 'procesar_grafica.php';
+                    data: [<?php 
                             echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $a . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
 
                   }]
