@@ -11,9 +11,10 @@ $db = new DB();
     <title>Administrador</title>
     <link rel="stylesheet" href="public/css/styles20.css">
     <link rel="stylesheet" href="public/css/styles21.css">
+    <link rel="stylesheet" href="public/css/tablas.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-   
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +22,7 @@ $db = new DB();
      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
 
 
@@ -130,29 +131,18 @@ $db = new DB();
                         </div>
                     </header>
 
-
-
-
-
-                    <!-- TABLAS -->
-
-
-
-
-
-                    <form class="form-inline mt-4 mb-2 mr-0 txt-center container" method="POST" name="formFechas" id="formFechas">
+                    <!-- PRUEBA DE CONSULTA CON JQUERY-->
+                    <form class="form-inline mt-4 mb-2 mr-0 txt-center container" method="POST">
                         <div class="row  col-10">
                             <div class="col-4 form-group">
                                 <label for="fecha_inicio">Fecha Inicio:</label>
-                                <input type="date" class="form-control" name="fecha_inicio" required>
+                                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
                             </div>
                             <div class="col-4 form-group">
                                 <label for="fecha_final">Fecha Final:</label>
-                                <input type="date" class="form-control" name="fecha_final" required>
+                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" required>
                             </div>
-                            <div class=" col-4 form-group">
-                                <button type="submit" class="btn btn-primary">Buscar</button>
-                            </div>
+
 
                         </div>
                     </form>
@@ -161,131 +151,18 @@ $db = new DB();
                     <form method="POST" class="container mr-0">
                         <div class="row col-5  mt-4">
                             <div class="input-group mb-3">
-                                <input name="consulta" type="text" class="form-control" placeholder="Dato a consultar" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-outline-secondary" type="button">Buscar</button>
-                                </div>
+                                <label for="caja_busqueda">Buscar:</label>
+                                <input type="text" name="caja_busqueda" id="caja_busqueda" class="form-control" placeholder="">
+
                             </div>
                         </div>
 
                     </form>
 
-                    <br>
-
-                    <section id="tabla_resultado" class="text-center">
-                        <!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
-
-                        <table class=" mt-5" align="center" border="1" width="1000">
-
-                            <tr class="bg-dark text-white">
-                                <th colspan="11">ESTADISTICA DE LA OCUPACIÓN HOTELERA</th>
-                            </tr>
-                            <tr class="bg-light text-dark">
-                                <th>Hotel</th>
-                                <th>Habitaciones <br> Ocupadas</th>
-                                <th>Dias vacaciones</th>
-                                <th>Numero de <br> habitaciones</th>
-                                <th>Costo del hotel</th>
-                                <th>Personas <br>Nacionales</th>
-                                <th>Personas <br>Extranjeras</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Fecha de Fin</th>
-                                <th>%</th>
-                                <th>Derrama economica</th>
-
-
-                            </tr>
-
-                            <?php
-
-                            if (!empty($_POST['consulta'])) {
-
-                                $q = $_POST['consulta'];
-
-                                $sentencia = $db->connect()->prepare("SELECT hotel, habitaciones_ocupadas,dias_vacaciones,num_habitaciones,costo_hotel,
-            personas_nacionales, personas_extranjeras, fecha_inicio,fecha_fin FROM registro WHERE Hotel LIKE '%" . $q . "%' OR habitaciones_ocupadas LIKE '%" . $q . "%'
-            OR dias_vacaciones LIKE '%" . $q . "%' OR num_habitaciones LIKE '%" . $q . "%' OR costo_hotel LIKE '%" . $q . "%' ");
-                                $sentencia->execute();
-
-                                foreach ($sentencia as $row) {
-
-                            ?>
-                                    <tr>
-                                        <td><?php echo $row[0]; ?></td>
-                                        <td><?php echo $row[1]; ?></td>
-                                        <td><?php echo $row[2]; ?></td>
-                                        <td><?php echo $row[3]; ?></td>
-                                        <td><?php echo $row[4]; ?></td>
-                                        <td><?php echo $row[5]; ?></td>
-                                        <td><?php echo $row[6]; ?></td>
-                                        <td><?php echo $row[7]; ?></td>
-                                        <td><?php echo $row[8]; ?></td>
-                                        <td><?php echo (($row[1] / $row[2] / $row[3]) * 100); ?></td>
-                                        <td><?php echo $row[1] * $row[4]; ?></td>
-
-
-                                    </tr>
-                            <?php
-                                }
-                            }
-
-                            ?>
-
-
-
-
-
-
-
-
-
-                            <?php
-
-
-
-
-
-
-                            if (!empty($_POST['fecha_inicio']) && !empty($_POST['fecha_final'])) {
-
-                                $fecha_inicio = $_POST['fecha_inicio'];
-                                $fecha_final  = $_POST['fecha_final'];
-                                $sentencia = $db->connect()->prepare("SELECT hotel, habitaciones_ocupadas,dias_vacaciones,num_habitaciones,costo_hotel,
-                personas_nacionales, personas_extranjeras, fecha_inicio,fecha_fin FROM registro WHERE fecha_inicio BETWEEN '{$fecha_inicio}' AND '{$fecha_final}'");
-                                $sentencia->execute();
-
-                                foreach ($sentencia as $row) {
-
-                            ?>
-                                    <tr>
-                                        <td><?php echo $row[0]; ?></td>
-                                        <td><?php echo $row[1]; ?></td>
-                                        <td><?php echo $row[2]; ?></td>
-                                        <td><?php echo $row[3]; ?></td>
-                                        <td><?php echo $row[4]; ?></td>
-                                        <td><?php echo $row[5]; ?></td>
-                                        <td><?php echo $row[6]; ?></td>
-                                        <td><?php echo $row[7]; ?></td>
-                                        <td><?php echo $row[8]; ?></td>
-                                        <td><?php echo (($row[1] / $row[2] / $row[3]) * 100); ?></td>
-                                        <td><?php echo $row[1] * $row[4]; ?></td>
-
-
-                                    </tr>
-                            <?php
-                                }
-                            }
-
-                            ?>
-
-                        </table>
-                    </section>
-
-
-
-
-
-
+                    <!-- TABLAS -->
+                    <div class="ml-3 container-fluid" id="datos">
+                     
+                    </div>
                 </div>
 
             </main>
@@ -296,6 +173,10 @@ $db = new DB();
         </div>
 
     </main>
+    <script src="public/js/jquery-3.2.1.min.js"></script>
+    <script src="public/js/buscar_datos.js"></script>
+    <script src="public/js/buscar_fechas.js"></script>
+
 </body>
 
 
@@ -303,14 +184,11 @@ $db = new DB();
 </html>
 
 
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
 <script id="rendered-js" src="public/js/js.js"></script>

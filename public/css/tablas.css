@@ -1,0 +1,16 @@
+table{
+    margin-top: 4%;
+    text-align: center;
+    border: 2px solid black;
+    padding: 15px;
+}
+
+
+td{
+    background-color: snow;
+    border: 2px solid black;
+}
+th, thead, tr{
+    background-color: slategrey;
+    border: 2px solid black;
+}
