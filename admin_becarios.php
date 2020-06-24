@@ -18,13 +18,9 @@ $db = new DB();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <!-- los icoonos = https://fontawesome.com/icons
-     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
-    -->
-
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
-
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
     <style>
         #signup {
             padding: 0px 25px 25px;
@@ -167,7 +163,7 @@ $db = new DB();
 
                     <!-- Formulario de registro becario-->
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6 col-sm-12 col-xs-12 mt-3">
                             <div class="row">
                                 <div class="col-4 text-center">
                                     <h4>Añadir <br>usuario</h4>
@@ -183,9 +179,9 @@ $db = new DB();
                                 </div>
                             </div>
                             <!--Registra usuario-->
-                            <div class="row ">
+                            <div class="row mt-5 ml-5">
                                 <div class="col-12 text-center" style="display: none;" id="agregarUsuario">
-                                    <h4 class="text-center">Registra un nuevo usuario</h4>
+                                    <h4 class="">Registra un nuevo usuario</h4>
                                     <form class="ml-3 mt-3 col-10" id="signup" action="registro_becario.php" method="POST">
                                         <div class="mt-3 form-group"><i class="fa fa-user" aria-hidden="true"></i>
                                             <label for="nombres">Nombres</label>
@@ -210,7 +206,7 @@ $db = new DB();
 
                             </div>
                             <!--Elimina usuario-->
-                            <div class="row ">
+                            <div class="row mt-1 ml-5">
                                 <div class="col-12 text-center" style="display: none;" id="eliminarUsuario">
                                     <h4 class="text-center">Elimina un usuario</h4>
                                     <form class="ml-3 mt-3 col-10" id="signup" action="eliminar_becario.php" method="POST">
@@ -232,11 +228,11 @@ $db = new DB();
 
                             </div>
                             <!--Modificar contraseña de usuario-->
-                            <div class="row ">
+                            <div class="row  ml-5">
                                 <div class="col-12 text-center" style="display: none;" id="cambiarPassword">
                                     <h4 class="text-center">Contraseña de usuario registrado</h4>
                                     <form class="ml-3 mt-3 col-10" action="cambiarpas_becario.php" id="signup" method="POST">
-                                      
+
                                         <div class="form-group"> <i class="fa fa-at" aria-hidden="true"></i>
                                             <label for="email">Correo</label>
                                             <input type="email" class="form-control" name="email" id="email" placeholder="" required>
@@ -255,7 +251,7 @@ $db = new DB();
 
 
 
-                        <div class="col-6 text-center">
+                        <div class="col-lg-6 col-sm-12 col-xs-12 mt-3 text-center">
 
                             <div>
                                 <h4>Becarios registrados</h4>

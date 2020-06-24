@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once 'db.php';
 include_once 'procesar_grafica.php';
 $db = new DB();
@@ -23,6 +23,8 @@ $db = new DB();
   <script src="Chartjs/Chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- Site Icons -->
+  <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
 </head>
 
 <body>
@@ -89,8 +91,8 @@ $db = new DB();
 
                             if ($row[0] != 'Administrador') {
                             ?>> <?php echo $row[0];
-                                                      } else {
-                                                        ?> style="display: none;" > <?php
+                              } else {
+                                ?> style="display: none;" > <?php
                                                                                   }
                                                                                     ?></a>
                       <?php
@@ -190,7 +192,7 @@ $db = new DB();
                     ],
                     borderWidth: 2,
 
-                    data: [<?php 
+                    data: [<?php
                             echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $a . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
 
                   }]
