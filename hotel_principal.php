@@ -68,11 +68,11 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="start">Fecha inicio</label>
-                                        <input type="date" id="start" name="inicioFecha" value="" min="2019-01-01" max="2021-01-01" required>
+                                        <input type="date" id="start" name="inicioFecha" value="" min="2016-01-01" max="2021-01-01" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="end">Fecha fin </label>
-                                        <input type="date" id="end" name="finFecha" value="" min="2019-01-01" max="2021-01-01" required>
+                                        <input type="date" id="end" name="finFecha" value="" min="2016-01-01" max="2021-01-01" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Habitaciones Ocupadas" value="" name="habOcupadas" required />
