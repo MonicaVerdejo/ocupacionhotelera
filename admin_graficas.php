@@ -100,6 +100,12 @@ $db = new DB();
                   </ul>
                 </div>
               </li>
+              <li>
+                <a href="admin_becarios.php">
+                  <i class="fas fa-align-justify"></i>
+                  <span>Becarios</span>
+                </a>
+              </li>
               <li class="header-menu">
                 <span>Sistema</span>
               </li>
@@ -118,12 +124,12 @@ $db = new DB();
       <!-- Sidebar end -->
       <main class="page-content">
         <div class="container-fluid">
-          <h2>Graficas</h2>
+          <h2>Derrama económica por ocupación hotelera en Champotón</h2>
 
           <hr>
           <div class="row">
             <div class="form-group col-md-12">
-              <p>texto</p>
+              <p>El concepto de la derrama económica motivada por la actividad turística comprende la cuantificación del valor monetario total promedio (en pesos corrientes), de los gastos que como mínimo son realizados por los visitantes con pernocta a los principales centros turísticos del Estado durante el periodo de análisis.</p>
             </div>
           </div>
 
@@ -132,7 +138,7 @@ $db = new DB();
 
           <div class="tabla">
             <div>
-              <h1 class="text-center mt-5">Nomas pa probarle</h1>
+              <h1 class="text-center mt-5">Derrama económica</h1>
               <div class="resultados" style="width:900px; margin-left:10%;margin-bottom:10%;"><canvas id="grafico"></canvas></div>
 
             </div>
@@ -141,12 +147,12 @@ $db = new DB();
               var contexto = document.getElementById("grafico").getContext("2d");
               var grafico = new Chart(contexto, {
 
-                type: "doughnut", //line,bar,pie,bubble,doughnut,polarArea
+                type: "bar", //line,bar,pie,bubble,doughnut,polarArea
 
                 data: {
                   labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                   datasets: [{
-                    label: "Ventas",
+                    label: "Derrama",
                     //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                     //backgroundColor: 'transparent',
                     //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra

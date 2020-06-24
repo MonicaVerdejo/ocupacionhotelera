@@ -29,7 +29,7 @@ $stmt->bindParam(":password", $password);
 
 if ($stmt->execute()) {
   $message = "Usuario creado";
-    echo "<script>location.href='hotel_principal.php';</script>";
+    echo "<script>location.href='admin_becarios.php';</script>";
 }else{
    $message = "Error al crear usuario";
 }
@@ -38,7 +38,7 @@ if ($stmt->execute()) {
 }else{
   echo'<script type="text/javascript">
   
-  window.location.href="registrar.php";
+  window.location.href="admin_becarios.php";
   alert("No es un correo admitido, intenta con gmail.com, hotmail.com, outlook.com o yahoo.es");
   </script>';
 }  

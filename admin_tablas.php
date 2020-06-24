@@ -102,6 +102,12 @@ $db = new DB();
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="admin_becarios.php">
+                                    <i class="fas fa-align-justify"></i>
+                                    <span>Becarios</span>
+                                </a>
+                            </li>
                             <li class="header-menu">
                                 <span>Sistema</span>
                             </li>
@@ -161,7 +167,7 @@ $db = new DB();
 
                     <!-- TABLAS -->
                     <div class="ml-3 container-fluid" id="datos">
-                     
+
                     </div>
                 </div>
 

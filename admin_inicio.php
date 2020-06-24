@@ -75,7 +75,8 @@ if (!isset($_SESSION['rol'])) {
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <?php
+                      <?php 
+                      $db=new DB();
                       $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
                       $sentencia->execute();
 
@@ -86,8 +87,8 @@ if (!isset($_SESSION['rol'])) {
 
                             if ($row[0] != 'Administrador') {
                             ?>> <?php echo $row[0];
-                                                      } else {
-                                                        ?> style="display: none;" > <?php
+                              } else {
+                                ?> style="display: none;" > <?php
                                                                                   }
                                                                                     ?></a>
                       <?php
@@ -96,6 +97,12 @@ if (!isset($_SESSION['rol'])) {
                     </li>
                   </ul>
                 </div>
+              </li>
+              <li>
+                <a href="admin_becarios.php">
+                  <i class="fas fa-align-justify"></i>
+                  <span>Becarios</span>
+                </a>
               </li>
               <li class="header-menu">
                 <span>Sistema</span>
@@ -113,7 +120,7 @@ if (!isset($_SESSION['rol'])) {
           <!-- sidebar-content  -->
       </nav>
       <!-- Sidebar end -->
-      <!-- sidebar-End  -->
+   
 
 
       <main class="page-content">
