@@ -63,7 +63,7 @@ $db = new DB();
 
                             <li>
                                 <a href="admin_graficas.php">
-                                    <i class="fas fa-align-justify"></i>
+                                <i class="fas fa-chart-pie"></i>
                                     <span>Graficas</span>
                                 </a>
                             </li>
@@ -100,7 +100,7 @@ $db = new DB();
                             </li>
                             <li>
                                 <a href="admin_becarios.php">
-                                    <i class="fas fa-align-justify"></i>
+                                    <i class="fas fa-graduation-cap"></i>
                                     <span>Becarios</span>
                                 </a>
                             </li>
