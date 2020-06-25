@@ -65,12 +65,11 @@ if ($sentencia->rowCount() > 0) {
         <td>" . $row['personas_extranjeras'] . "</td>
         <td>" . $row['fecha_inicio'] . "</td>
         <td>" . $row['fecha_fin'] . "</td>
-        <td>" . (($row['habitaciones_ocupadas'] / $row['dias_vacaciones'] / $row['num_habitaciones']) * 100) . "</td>
+        <td>" . round((($row['habitaciones_ocupadas'] / $row['dias_vacaciones'] / $row['num_habitaciones']) * 100), 3) . "</td>
         <td>" . $row['habitaciones_ocupadas'] * $row['costo_hotel'] . "</td>
     </tr>
         ";
     }
-
     $salida .= "</tbody></table>";
 } else {
     $salida .= "No existen coincidencias";

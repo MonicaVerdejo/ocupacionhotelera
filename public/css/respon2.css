@@ -1,0 +1,33 @@
+@media only screen and (max-width: 900px) {
+    .register-right{
+        margin-top: 2em;
+    }
+    .register .nav-tabs{
+        width: 28%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .register-left a{
+        margin-top: 0;
+    
+    }
+    .register .nav-tabs{
+        width: 33%;
+    }
+    
+    .register-right{
+        margin-left: 2em;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        background: #f8f9fa;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 485px) {
+    .register .nav-tabs{
+        width: 38%;
+    }
+}
