@@ -33,7 +33,7 @@ CREATE TABLE `becario` (
   `nombres` varchar(60) NOT NULL,
   `apellidos` varchar(60) NOT NULL,
   `correo` varchar(60) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

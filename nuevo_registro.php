@@ -17,10 +17,13 @@ if (isset($_POST['hotel'])){
 
     $sentencia = $db->connect()->prepare("INSERT INTO registro (hotel,fecha_inicio,fecha_fin,habitaciones_ocupadas,personas_extranjeras,
     personas_nacionales,dias_vacaciones,num_habitaciones,costo_hotel) VALUES('$usuario', '$inicioFecha', '$finFecha' ,'$habOcupadas',
-    '$persEtranjeras','$persNacion', '$diasVacaciones', '$numHabitaciones', '$costoHotel')");
+    '$persExtranjeras','$persNacion', '$diasVacaciones', '$numHabitaciones', '$costoHotel')");
 
 
     $sentencia->execute();
+    $registro = "correcto";
+    echo json_encode(array("estado" => $registro));
+
     header('Location: hotel_principal.php');
 } else {
     echo 'no esta imprimiendo';
