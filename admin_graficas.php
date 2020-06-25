@@ -1,6 +1,5 @@
-<?php 
+<?php
 include_once 'db.php';
-include_once 'procesar_grafica.php';
 $db = new DB();
 ?>
 
@@ -14,7 +13,7 @@ $db = new DB();
   <link rel="stylesheet" href="public/css/styles21.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <!---->
@@ -23,7 +22,22 @@ $db = new DB();
   <script src="Chartjs/Chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- Site Icons-->
+  <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+  <style>
+    body {
+      background-color: #ededed;
+    }
+
+    .tabla {
+      background-color: white;
+      width: 90%;
+      margin: 20px auto;
+
+    }
+  </style>
 </head>
+<!-- Site Icons  background-color: #575e66;-->
 
 <body>
   <main>
@@ -65,7 +79,7 @@ $db = new DB();
 
               <li>
                 <a href="admin_graficas.php">
-                  <i class="fas fa-align-justify"></i>
+                  <i class="fas fa-chart-pie"></i>
                   <span>Graficas</span>
                 </a>
               </li>
@@ -89,16 +103,22 @@ $db = new DB();
 
                             if ($row[0] != 'Administrador') {
                             ?>> <?php echo $row[0];
-                                                      } else {
-                                                        ?> style="display: none;" > <?php
-                                                                                  }
-                                                                                    ?></a>
+                              } else {
+                                ?> style="display: none;" > <?php
+                                                          }
+                                                            ?></a>
                       <?php
                       }
                       ?>
                     </li>
                   </ul>
                 </div>
+              </li>
+              <li>
+                <a href="admin_becarios.php">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Becarios</span>
+                </a>
               </li>
               <li class="header-menu">
                 <span>Sistema</span>
@@ -116,108 +136,378 @@ $db = new DB();
           <!-- sidebar-content  -->
       </nav>
       <!-- Sidebar end -->
+
+      <!--Contenido principal-->
       <main class="page-content">
         <div class="container-fluid">
-          <h2>Graficas</h2>
+          <h2>Ocupación hotelera en el municipio de Champotón</h2>
 
-          <hr>
           <div class="row">
-            <div class="form-group col-md-12">
-              <p>texto</p>
-            </div>
-          </div>
-
-          <!--Grafica de ventas-->
-
-
-          <div class="tabla">
-            <div>
-              <h1 class="text-center mt-5">Nomas pa probarle</h1>
-              <div class="resultados" style="width:900px; margin-left:10%;margin-bottom:10%;"><canvas id="grafico"></canvas></div>
+            <div class="col-8">
 
             </div>
+            <div class="col-4">
+            <form class="form-inline" action="procesar_grafica.php" method="POST">
+            <small id="passwordHelpInline" class="text-muted ml-2">
+              Escoja el año que desea graficar.
+            </small>
+            <div class="form-group ml-2">
 
-            <script>
-              var contexto = document.getElementById("grafico").getContext("2d");
-              var grafico = new Chart(contexto, {
-
-                type: "doughnut", //line,bar,pie,bubble,doughnut,polarArea
-
-                data: {
-                  labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                  datasets: [{
-                    label: "Ventas",
-                    //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
-                    //backgroundColor: 'transparent',
-                    //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
-                    //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
-                    //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
-                    hoverBackgroundColor: '#6185ae',
-                    hoverBorderColor: 'black',
-                    backgroundColor: [
-                      'rgba(0, 99, 132, 0.8)',
-                      'rgba(30, 99, 132, 0.8)',
-                      'rgba(60, 99, 132, 0.8)',
-                      'rgba(90, 99, 132, 0.8)',
-                      'rgba(120, 99, 132, 0.8)',
-                      'rgba(150, 99, 132, 0.8)',
-                      'rgba(160, 99, 132, 0.8)',
-                      'rgba(180, 99, 132, 0.8)',
-                      'rgba(210, 99, 132, 0.8)',
-                      'rgba(240, 99, 132, 0.8)',
-                      'rgba(270, 99, 130, 0.8)',
-                      'rgba(300, 100, 138, 0.8)'
-                    ],
-                    borderColor: [
-                      'rgba(0, 99, 132, 1)',
-                      'rgba(30, 99, 132, 1)',
-                      'rgba(60, 99, 132, 1)',
-                      'rgba(90, 99, 132, 1)',
-                      'rgba(120, 99, 132, 1)',
-                      'rgba(150, 99, 132, 1)',
-                      'rgba(160, 90, 132, 1)',
-                      'rgba(180, 99, 132, 1)',
-                      'rgba(210, 99, 132, 1)',
-                      'rgba(240, 99, 132, 1)',
-                      'rgba(270, 99, 132, 1)',
-                      'rgba(300, 99, 132, 1)'
-                    ],
-                    borderWidth: 2,
-
-                    data: [<?php 
-                            echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $a . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
-
-                  }]
-
-                },
-
-                options: {
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero: true
-                      }
-                    }]
+              <select id="year" class="form-control" name="year">
+                <?php
+                for ($i = 2016; $i < 2023; $i++) {
+                  if ($i == 2016) {
+                    echo '<option value="' . $i . '" selected>' . $i . '</option>';
+                  } else {
+                    echo '<option value="' . $i . '" >' . $i . '</option>';
                   }
                 }
-              });
-            </script>
+                ?>
+              </select>
+            </div>
+            <button class="btn btn-info ml-2" type="submit">Graficar</button>
+
+
+
+          </form>
+            </div>
+          </div>
+
+          <hr>
+          <!--Sección info general-->
+          <div class="row">
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                <div class="row card-body">
+
+                  <div class="col-6">
+                    <h5 class="card-title">$<?php require_once 'procesar_grafica.php';
+                                            echo $ingresos; ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
+                  </div>
+                  <div class="col-6"><img width="100" height="100" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                <div class="row card-body">
+                  <div class="col-6">
+                    <h5 class="card-title"><?php echo $turismo; ?> visitas</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Turismo</h6>
+                  </div>
+                  <div class="col-6"><img width="100" height="100" src="public/img/turismo.jpg" alt="Turismo en ocupación hotelera"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                <div class="row card-body">
+                  <div class="col-6">
+                    <h5 class="card-title"><?php echo $hotel; ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Hotel más visitado</h6>
+                  </div>
+                  <div class="col-6"><img width="100" height="100" src="public/img/favorito.png" alt="Hotel más visitado"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
 
 
+          <hr>
+          <!--Graficas-->
 
+          <div class="row">
+            <!-- Grafica para derrama mensual-->
+            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+              <div class="tabla card">
+
+                <div>
+                  <h1 class="ml-3 mt-3 card-title">Turismo</h1>
+
+                  <hr>
+                  <div class="row">
+                    <div class="resultados col-12">
+                      <canvas id="grafico" style="width:80%; margin-bottom:10%;"></canvas>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Actividad turística comprende la cuantificación de las visitas, las cuales se dividen en visitantes de otros países o extranjeros, y los compatriotas.</small>
+                  </div>
+
+
+                </div>
+
+                <script>
+                  var contexto = document.getElementById("grafico").getContext("2d");
+                  var grafico = new Chart(contexto, {
+
+                    type: "bar", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                    data: {
+                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                      datasets: [{
+                        label: "Derrama economica",
+                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                        //backgroundColor: 'transparent',
+                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                        hoverBackgroundColor: '#6185ae',
+                        hoverBorderColor: 'black',
+
+                        backgroundColor: [
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(30, 99, 132, 0.8)',
+                          'rgba(60, 99, 132, 0.8)',
+                          'rgba(90, 99, 132, 0.8)',
+                          'rgba(120, 99, 132, 0.8)',
+                          'rgba(150, 99, 132, 0.8)',
+                          'rgba(160, 99, 132, 0.8)',
+                          'rgba(180, 99, 132, 0.8)',
+                          'rgba(210, 99, 132, 0.8)',
+                          'rgba(240, 99, 132, 0.8)',
+                          'rgba(270, 99, 130, 0.8)',
+                          'rgba(300, 100, 138, 0.8)'
+                        ],
+                        borderColor: [
+                          'rgba(0, 99, 132, 1)',
+                          'rgba(30, 99, 132, 1)',
+                          'rgba(60, 99, 132, 1)',
+                          'rgba(90, 99, 132, 1)',
+                          'rgba(120, 99, 132, 1)',
+                          'rgba(150, 99, 132, 1)',
+                          'rgba(160, 90, 132, 1)',
+                          'rgba(180, 99, 132, 1)',
+                          'rgba(210, 99, 132, 1)',
+                          'rgba(240, 99, 132, 1)',
+                          'rgba(270, 99, 132, 1)',
+                          'rgba(300, 99, 132, 1)'
+                        ],
+                        borderWidth: 2,
+
+                        data: [<?php
+                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+
+                      }]
+
+                    },
+
+                    options: {
+                      responsive: true,
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }]
+                      }
+                    }
+                  });
+                </script>
+              </div>
+            </div>
+            <!--Grafica visitas mensuales-->
+            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+              <div class="tabla card">
+
+                <div>
+                  <h1 class="ml-3 mt-3 card-title">Porcentaje de ocupación</h1>
+
+                  <hr>
+                  <div class="row">
+                    <div class="resultados col-12">
+                      <canvas id="grafico2" style="width:80%; margin-bottom:10%;"></canvas>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">El porcentaje de ocupación que promedian nuestros hoteles de forma mensual</small>
+                  </div>
+
+
+                </div>
+
+                <script>
+                  var contexto = document.getElementById("grafico2").getContext("2d");
+                  var grafico = new Chart(contexto, {
+
+                    type: "line", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                    data: {
+                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                      datasets: [{
+                        label: "Derrama economica",
+                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                        //backgroundColor: 'transparent',
+                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                        hoverBackgroundColor: '#6185ae',
+                        hoverBorderColor: 'black',
+
+                        backgroundColor: [
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(30, 99, 132, 0.8)',
+                          'rgba(60, 99, 132, 0.8)',
+                          'rgba(90, 99, 132, 0.8)',
+                          'rgba(120, 99, 132, 0.8)',
+                          'rgba(150, 99, 132, 0.8)',
+                          'rgba(160, 99, 132, 0.8)',
+                          'rgba(180, 99, 132, 0.8)',
+                          'rgba(210, 99, 132, 0.8)',
+                          'rgba(240, 99, 132, 0.8)',
+                          'rgba(270, 99, 130, 0.8)',
+                          'rgba(300, 100, 138, 0.8)'
+                        ],
+                        borderColor: [
+                          'rgba(0, 99, 132, 1)',
+                          'rgba(30, 99, 132, 1)',
+                          'rgba(60, 99, 132, 1)',
+                          'rgba(90, 99, 132, 1)',
+                          'rgba(120, 99, 132, 1)',
+                          'rgba(150, 99, 132, 1)',
+                          'rgba(160, 90, 132, 1)',
+                          'rgba(180, 99, 132, 1)',
+                          'rgba(210, 99, 132, 1)',
+                          'rgba(240, 99, 132, 1)',
+                          'rgba(270, 99, 132, 1)',
+                          'rgba(300, 99, 132, 1)'
+                        ],
+                        borderWidth: 2,
+
+                        data: [<?php
+                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+
+                      }]
+
+                    },
+
+                    options: {
+                      responsive: true,
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }]
+                      }
+                    }
+                  });
+                </script>
+              </div>
+            </div>
+            <!--Fin grafica 2-->
+          </div>
+          <!--Fin graficas-->
+
+          <!--Segundo row de grafica-->
+          <div class="row">
+            <div class="col-12">
+              <div class="tabla card">
+
+                <div>
+                  <h1 class="ml-3 mt-3 card-title">Derrama económica</h1>
+
+                  <hr>
+                  <div class="row">
+                    <div class="resultados col-12">
+                      <canvas id="grafico3" style="width:80%; margin-bottom:10%;"></canvas>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">El concepto de la derrama económica motivada por la actividad turística comprende la cuantificación del valor monetario total promedio (en pesos corrientes), de los gastos que como mínimo son realizados por los visitantes con pernocta a los principales centros turísticos del Estado durante el periodo de análisis.</small>
+                  </div>
+
+
+                </div>
+
+                <script>
+                  var contexto = document.getElementById("grafico3").getContext("2d");
+                  var grafico = new Chart(contexto, {
+
+                    type: "bar", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                    data: {
+                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                      datasets: [{
+                        label: "Derrama economica",
+                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                        //backgroundColor: 'transparent',
+                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                        hoverBackgroundColor: '#6185ae',
+                        hoverBorderColor: 'black',
+
+                        backgroundColor: [
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(30, 99, 132, 0.8)',
+                          'rgba(60, 99, 132, 0.8)',
+                          'rgba(90, 99, 132, 0.8)',
+                          'rgba(120, 99, 132, 0.8)',
+                          'rgba(150, 99, 132, 0.8)',
+                          'rgba(160, 99, 132, 0.8)',
+                          'rgba(180, 99, 132, 0.8)',
+                          'rgba(210, 99, 132, 0.8)',
+                          'rgba(240, 99, 132, 0.8)',
+                          'rgba(270, 99, 130, 0.8)',
+                          'rgba(300, 100, 138, 0.8)'
+                        ],
+                        borderColor: [
+                          'rgba(0, 99, 132, 1)',
+                          'rgba(30, 99, 132, 1)',
+                          'rgba(60, 99, 132, 1)',
+                          'rgba(90, 99, 132, 1)',
+                          'rgba(120, 99, 132, 1)',
+                          'rgba(150, 99, 132, 1)',
+                          'rgba(160, 90, 132, 1)',
+                          'rgba(180, 99, 132, 1)',
+                          'rgba(210, 99, 132, 1)',
+                          'rgba(240, 99, 132, 1)',
+                          'rgba(270, 99, 132, 1)',
+                          'rgba(300, 99, 132, 1)'
+                        ],
+                        borderWidth: 2,
+
+                        data: [<?php
+                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+
+                      }]
+
+                    },
+
+                    options: {
+                      responsive: true,
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }]
+                      }
+                    }
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
 
 
         </div>
 
-      </main>
-      <!-- page-content" -->
-
-
-
     </div>
-    <!-- page-wrapper -->
+
+  </main>
+  <!-- page-content" -->
+
+
+
+  </div>
+  <!-- page-wrapper -->
   </main>
 </body>
 
@@ -230,5 +520,5 @@ $db = new DB();
 <script id="rendered-js" src="public/js/js.js"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

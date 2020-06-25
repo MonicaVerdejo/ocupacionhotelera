@@ -62,7 +62,7 @@ if (!isset($_SESSION['rol'])) {
 
               <li>
                 <a href="admin_graficas.php">
-                  <i class="fas fa-align-justify"></i>
+                <i class="fas fa-chart-pie"></i>
                   <span>Graficas</span>
                 </a>
               </li>
@@ -86,8 +86,8 @@ if (!isset($_SESSION['rol'])) {
 
                             if ($row[0] != 'Administrador') {
                             ?>> <?php echo $row[0];
-                                                      } else {
-                                                        ?> style="display: none;" > <?php
+                              } else {
+                                ?> style="display: none;" > <?php
                                                                                   }
                                                                                     ?></a>
                       <?php
@@ -96,6 +96,12 @@ if (!isset($_SESSION['rol'])) {
                     </li>
                   </ul>
                 </div>
+              </li>
+              <li>
+                <a href="admin_becarios.php">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Becarios</span>
+                </a>
               </li>
               <li class="header-menu">
                 <span>Sistema</span>
@@ -115,7 +121,7 @@ if (!isset($_SESSION['rol'])) {
       <!-- Sidebar end -->
 
 
-      
+
       <main class="page-content">
         <div class="container-fluid">
           <h2>Hotel</h2>
