@@ -75,7 +75,7 @@ if (!isset($_SESSION['rol'])) {
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <?php 
+                      <?php
                       $db=new DB();
                       $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
                       $sentencia->execute();
@@ -120,23 +120,131 @@ if (!isset($_SESSION['rol'])) {
           <!-- sidebar-content  -->
       </nav>
       <!-- Sidebar end -->
-   
+
 
 
       <main class="page-content">
         <div class="container-fluid">
           <h2>Datos</h2>
-
-          <hr>
+          <!-- Correos de los hoteles-->
           <div class="row">
-            <div class="form-group col-md-12">
-              <p>texto</p>
+          <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+            <div class="tabla card">
+              <div>
+
+                <h3 class="ml-3 mt-3 card-title "><img src="public/img/mail.svg" height="50" width="50"> Correos de hoteles </h3>
+                <hr>
+                <div class="row">
+                  <div class="resultados col-12 table-responsive ">
+                    <table class="table" align="center">
+                        <tr class="bg-dark text-white">
+                        </tr>
+                        <tr class="bg-light text-dark">
+                            <th>Hotel</th>
+                            <th>Correo</th>
+                        </tr>
+
+                        <?php
+
+                        $sentencia = $db->connect()->prepare("SELECT usuario, correo FROM usuario WHERE rol_id = '2'");
+                        $sentencia->execute();
+
+                        foreach ($sentencia as $row) {
+
+                        ?>
+                            <tr>
+                                <td><?php echo $row[0]; ?></td>
+                                <td><?php echo $row[1]; ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+
+                    </table>
+                    <br>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Correos registrados por los hoteles.</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+            <section id="tabla_resultado" class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
+                                <hr>
+                                <div class="row">
+                                  <div class="col-4 form-group">
+                                      <label for="fecha_inicio">Fecha</label>
+                                      <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                                  </div>
+                                  <div class="resultados col-12 table-responsive ">
+                                    <table class="table" align="center">
+                                        <tr class="bg-dark text-white">
+                                        </tr>
+                                        <tr class="bg-light text-dark">
+                                            <th>Hotel</th>
+                                            <th>Status</th>
+                                        </tr>
+
+                                        <?php
+
+                                        $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario WHERE rol_id = '2'");
+                                        $sentencia->execute();
+
+                                        foreach ($sentencia as $row) {
+
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $row[0]; ?></td>
+                                                
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </table>
+                                    <br>
+                                  </div>
+                                </div>
+                                <div class="card-footer">
+                                  <small class="text-muted">Correos registrados por los hoteles.</small>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+                <div class="card-footer">
+                  <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
+                </div>
+              </div>
             </div>
           </div>
-
-
+          <!--Fin grafica 2-->
+          <hr>
         </div>
-
+        </div>
       </main>
       <!-- page-content" -->
     </div>
