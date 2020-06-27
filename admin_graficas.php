@@ -180,12 +180,12 @@ $db = new DB();
               <div class="card" style="width: 18rem;">
                 <div class="row card-body">
 
-                  <div class="col-6">
+                  <div class="col-7">
                     <h5 class="card-title">$<?php require_once 'procesar_grafica.php';
                                             echo $ingresos; ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
                   </div>
-                  <div class="col-6"><img width="100" height="100" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
+                  <div class="col-5"><img width="95" height="95" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
                 </div>
               </div>
             </div>
@@ -219,7 +219,7 @@ $db = new DB();
           <!--Graficas-->
 
           <div class="row">
-            <!-- Grafica para derrama mensual-->
+  <!-- Grafica Turismo/visitantes en champo-->
             <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
               <div class="tabla card">
 
@@ -243,55 +243,98 @@ $db = new DB();
                   var contexto = document.getElementById("grafico").getContext("2d");
                   var grafico = new Chart(contexto, {
 
-                    type: "bar", //line,bar,pie,bubble,doughnut,polarArea
+                    type: "line", //line,bar,pie,bubble,doughnut,polarArea
 
 
                     data: {
                       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                       datasets: [{
-                        label: "Derrama economica",
+                        label: "Turistas de México",
+                        
+                        pointStyle: 'rectRot',
                         //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                         //backgroundColor: 'transparent',
                         //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
                         //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
                         //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
-                        hoverBackgroundColor: '#6185ae',
+                        hoverBackgroundColor: '#c9effc',
                         hoverBorderColor: 'black',
-
                         backgroundColor: [
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(30, 99, 132, 0.8)',
-                          'rgba(60, 99, 132, 0.8)',
-                          'rgba(90, 99, 132, 0.8)',
-                          'rgba(120, 99, 132, 0.8)',
-                          'rgba(150, 99, 132, 0.8)',
-                          'rgba(160, 99, 132, 0.8)',
-                          'rgba(180, 99, 132, 0.8)',
-                          'rgba(210, 99, 132, 0.8)',
-                          'rgba(240, 99, 132, 0.8)',
-                          'rgba(270, 99, 130, 0.8)',
-                          'rgba(300, 100, 138, 0.8)'
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)',
+                          'rgba(247, 248, 248, 0.55)'
+
                         ],
                         borderColor: [
-                          'rgba(0, 99, 132, 1)',
-                          'rgba(30, 99, 132, 1)',
-                          'rgba(60, 99, 132, 1)',
-                          'rgba(90, 99, 132, 1)',
-                          'rgba(120, 99, 132, 1)',
-                          'rgba(150, 99, 132, 1)',
-                          'rgba(160, 90, 132, 1)',
-                          'rgba(180, 99, 132, 1)',
-                          'rgba(210, 99, 132, 1)',
-                          'rgba(240, 99, 132, 1)',
-                          'rgba(270, 99, 132, 1)',
-                          'rgba(300, 99, 132, 1)'
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)',
+                          'rgba(0, 99, 132, 0.8)'
                         ],
+                        
+                        borderWidth: 2,
+                        
+                        data: [<?php
+                                echo ($e1 . "," . $f1 . "," . $m1 . "," . $a1 . "," . $ma1 . "," . $j1 . "," . $jl1 . "," . $ag1 . "," . $s1 . "," . $o1 . "," . $n1 . "," . $d1);  ?>],
+
+                      }, { //Turistas extranjeros
+                        label:"Turistas extranjeros",
+                        pointStyle: 'rectRot',
+                        hoverBackgroundColor: '#1e856b',
+                        hoverBorderColor: 'black',
+                        backgroundColor: [
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)',
+                         'rgba(52, 203, 155, 0.58)'
+
+                        ],
+                        borderColor: [
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)',
+                          'rgba(13, 130, 112, 0.82)'
+                        ],
+                       
                         borderWidth: 2,
 
                         data: [<?php
-                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+                                echo ($e2 . "," . $f2 . "," . $m2 . "," . $a2 . "," . $ma2 . "," . $j2 . "," . $jl2 . "," . $ag2 . "," . $s2 . "," . $o2 . "," . $n2 . "," . $d2); ?>],
 
-                      }]
+                    }]
 
                     },
 
@@ -309,12 +352,13 @@ $db = new DB();
                 </script>
               </div>
             </div>
+
             <!--Grafica visitas mensuales-->
             <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
               <div class="tabla card">
 
                 <div>
-                  <h1 class="ml-3 mt-3 card-title">Porcentaje de ocupación</h1>
+                  <h1 class="ml-3 mt-3 card-title">Ocupación</h1>
 
                   <hr>
                   <div class="row">
@@ -333,13 +377,13 @@ $db = new DB();
                   var contexto = document.getElementById("grafico2").getContext("2d");
                   var grafico = new Chart(contexto, {
 
-                    type: "line", //line,bar,pie,bubble,doughnut,polarArea
+                    type: "horizontalBar", //line,bar,pie,bubble,doughnut,polarArea
 
 
                     data: {
                       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                       datasets: [{
-                        label: "Derrama economica",
+                        label: "Porcentaje de ocupacion mensual",
                         //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                         //backgroundColor: 'transparent',
                         //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
@@ -379,7 +423,7 @@ $db = new DB();
                         borderWidth: 2,
 
                         data: [<?php
-                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+                                echo ($e3 . "," . $f3 . "," . $m3 . "," . $a3 . "," . $ma3 . "," . $j3 . "," . $jl3 . "," . $ag3 . "," . $s3 . "," . $o3 . "," . $n3 . "," . $d3); ?>],
 
                       }]
 
