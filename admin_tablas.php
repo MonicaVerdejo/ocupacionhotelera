@@ -40,97 +40,106 @@ $db = new DB();
 
 
         <div class="page-wrapper chiller-theme toggled">
-            <!--Sidebar-->
-            <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
-                <i class="fas fa-bars"></i>
-            </a>
-            <nav id="sidebar" class="sidebar-wrapper">
-                <div class="sidebar-content">
-                    <div class="sidebar-brand">
-                        <a href="#">Administrador</a>
-                        <div id="close-sidebar">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </div>
-                    <div class="sidebar-menu">
-                        <ul>
-                            <li class="header-menu">
-                                <span>General</span>
-                            </li>
-                            <li>
-                                <a href="admin_inicio.php">
-                                    <i class="fa fa-tachometer-alt"></i>
-                                    <span>Inicio</span>
-                                </a>
-                            </li>
+                <!--Sidebar-->
+      <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <a href="#">Administrador</a>
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+          <div class="sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span>General</span>
+              </li>
+              <li>
+                <a href="admin_inicio.php">
+                  <i class="fa fa-tachometer-alt"></i>
+                  <span>Inicio</span>
+                </a>
+              </li>
 
-                            <li>
-                                <a href="admin_tablas.php">
-                                    <i class="fas fa-table"></i>
-                                    <span>Tablas</span>
-                                </a>
+              <li>
+                <a href="admin_tablas.php">
+                  <i class="fas fa-table"></i>
+                  <span>Tablas</span>
+                </a>
 
-                            </li>
+              </li>
 
-                            <li>
-                                <a href="admin_graficas.php">
-                                    <i class="fas fa-chart-pie"></i>
-                                    <span>Graficas</span>
-                                </a>
-                            </li>
+              <li>
+                <a href="admin_graficas.php">
+                  <i class="fas fa-chart-pie"></i>
+                  <span>Graficas</span>
+                </a>
+              </li>
 
-                            <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fas fa-h-square"></i>
-                                    <span>Hoteles</span>
-                                </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <?php
-                                            $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
-                                            $sentencia->execute();
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="fas fa-h-square"></i>
+                  <span>Hoteles</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <?php
+                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
+                      $sentencia->execute();
 
-                                            foreach ($sentencia as $row) {
+                      foreach ($sentencia as $row) {
 
-                                            ?>
-                                                <a <?php
+                      ?>
+                        <form class="text-center" action="buscarid.php" method="POST">
 
-                                                    if ($row[0] != 'Administrador') {
-                                                    ?>> <?php echo $row[0];
-                                                    } else {
-                                                        ?> style="display: none;" > <?php
-                                                                                }
-                                                                                    ?></a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="admin_becarios.php">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span>Becarios</span>
-                                </a>
-                            </li>
-                            <li class="header-menu">
-                                <span>Sistema</span>
-                            </li>
-                            <li>
-                                <a href="cerrar.php">
-                                    <i class="fa fa-power-off"></i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
+                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
 
-                        </ul>
-                        <!-- sidebar-menu  -->
-                    </div>
-                    <!-- sidebar-content  -->
-            </nav>
-            <!-- Sidebar end -->
+                                                                                                                if ($row[1] != 'Administrador') {
+                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+
+                                                                                                                                                  } else {
+                                                                                                                                                    ?> style="display: none;" > <?php
+                                                                                                                                                                              }
+                                                                                                                                                                                ?></input type="submit">
+
+
+                        </form>
+                      <?php
+
+                      }
+                      ?>
+                    </li>
+                  </ul>
+
+
+                </div>
+              </li>
+              <li>
+                <a href="admin_becarios.php">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Becarios</span>
+                </a>
+              </li>
+              <li class="header-menu">
+                <span>Sistema</span>
+              </li>
+              <li>
+                <a href="cerrar.php">
+                  <i class="fa fa-power-off"></i>
+                  <span>Salir</span>
+                </a>
+              </li>
+
+            </ul>
+            <!-- sidebar-menu  -->
+          </div>
+          <!-- sidebar-content  -->
+      </nav>
+      <!-- Sidebar end -->
 
 
 

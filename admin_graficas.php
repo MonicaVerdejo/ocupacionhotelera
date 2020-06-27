@@ -44,7 +44,6 @@ $db = new DB();
 
     <div class="page-wrapper chiller-theme toggled">
 
-
       <!--Sidebar-->
       <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
@@ -93,25 +92,34 @@ $db = new DB();
                   <ul>
                     <li>
                       <?php
-                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
+                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
                       $sentencia->execute();
 
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <a <?php
+                        <form class="text-center" action="buscarid.php" method="POST">
 
-                            if ($row[0] != 'Administrador') {
-                            ?>> <?php echo $row[0];
-                              } else {
-                                ?> style="display: none;" > <?php
-                                                          }
-                                                            ?></a>
+                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+
+                                                                                                                if ($row[1] != 'Administrador') {
+                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+
+                                                                                                                                                  } else {
+                                                                                                                                                    ?> style="display: none;" > <?php
+                                                                                                                                                                              }
+                                                                                                                                                                                ?></input type="submit">
+
+
+                        </form>
                       <?php
+
                       }
                       ?>
                     </li>
                   </ul>
+
+
                 </div>
               </li>
               <li>
@@ -147,29 +155,29 @@ $db = new DB();
 
             </div>
             <div class="col-4">
-            <form class="form-inline" action="procesar_grafica.php" method="POST">
-            <small id="passwordHelpInline" class="text-muted ml-2">
-              Escoja el año que desea graficar.
-            </small>
-            <div class="form-group ml-2">
+              <form class="form-inline" action="procesar_grafica.php" method="POST">
+                <small id="passwordHelpInline" class="text-muted ml-2">
+                  Escoja el año que desea graficar.
+                </small>
+                <div class="form-group ml-2">
 
-              <select id="year" class="form-control" name="year">
-                <?php
-                for ($i = 2016; $i < 2023; $i++) {
-                  if ($i == 2016) {
-                    echo '<option value="' . $i . '" selected>' . $i . '</option>';
-                  } else {
-                    echo '<option value="' . $i . '" >' . $i . '</option>';
-                  }
-                }
-                ?>
-              </select>
-            </div>
-            <button class="btn btn-info ml-2" type="submit">Graficar</button>
+                  <select id="year" class="form-control" name="year">
+                    <?php
+                    for ($i = 2016; $i < 2023; $i++) {
+                      if ($i == 2016) {
+                        echo '<option value="' . $i . '" selected>' . $i . '</option>';
+                      } else {
+                        echo '<option value="' . $i . '" >' . $i . '</option>';
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+                <button class="btn btn-info ml-2" type="submit">Graficar</button>
 
 
 
-          </form>
+              </form>
             </div>
           </div>
 
@@ -219,7 +227,7 @@ $db = new DB();
           <!--Graficas-->
 
           <div class="row">
-  <!-- Grafica Turismo/visitantes en champo-->
+            <!-- Grafica Turismo/visitantes en champo-->
             <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
               <div class="tabla card">
 
@@ -250,7 +258,7 @@ $db = new DB();
                       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                       datasets: [{
                         label: "Turistas de México",
-                        
+
                         pointStyle: 'rectRot',
                         //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                         //backgroundColor: 'transparent',
@@ -288,30 +296,30 @@ $db = new DB();
                           'rgba(0, 99, 132, 0.8)',
                           'rgba(0, 99, 132, 0.8)'
                         ],
-                        
+
                         borderWidth: 2,
-                        
+
                         data: [<?php
                                 echo ($e1 . "," . $f1 . "," . $m1 . "," . $a1 . "," . $ma1 . "," . $j1 . "," . $jl1 . "," . $ag1 . "," . $s1 . "," . $o1 . "," . $n1 . "," . $d1);  ?>],
 
                       }, { //Turistas extranjeros
-                        label:"Turistas extranjeros",
+                        label: "Turistas extranjeros",
                         pointStyle: 'rectRot',
                         hoverBackgroundColor: '#1e856b',
                         hoverBorderColor: 'black',
                         backgroundColor: [
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)'
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)'
 
                         ],
                         borderColor: [
@@ -328,13 +336,13 @@ $db = new DB();
                           'rgba(13, 130, 112, 0.82)',
                           'rgba(13, 130, 112, 0.82)'
                         ],
-                       
+
                         borderWidth: 2,
 
                         data: [<?php
                                 echo ($e2 . "," . $f2 . "," . $m2 . "," . $a2 . "," . $ma2 . "," . $j2 . "," . $jl2 . "," . $ag2 . "," . $s2 . "," . $o2 . "," . $n2 . "," . $d2); ?>],
 
-                    }]
+                      }]
 
                     },
 

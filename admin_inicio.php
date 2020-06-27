@@ -9,6 +9,8 @@ if (!isset($_SESSION['rol'])) {
     header('location: index.php');
   }
 }
+
+$db=new DB();
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -27,9 +29,8 @@ if (!isset($_SESSION['rol'])) {
   <main>
 
     <div class="page-wrapper chiller-theme toggled">
-      <!--sideBar-->
-      <!--Sidebar-->
-      <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+       <!--Sidebar-->
+       <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
       </a>
       <nav id="sidebar" class="sidebar-wrapper">
@@ -62,7 +63,7 @@ if (!isset($_SESSION['rol'])) {
 
               <li>
                 <a href="admin_graficas.php">
-                <i class="fas fa-chart-pie"></i>
+                  <i class="fas fa-chart-pie"></i>
                   <span>Graficas</span>
                 </a>
               </li>
@@ -76,26 +77,34 @@ if (!isset($_SESSION['rol'])) {
                   <ul>
                     <li>
                       <?php
-                      $db=new DB();
-                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
+                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
                       $sentencia->execute();
 
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <a <?php
+                        <form class="text-center" action="buscarid.php" method="POST">
 
-                            if ($row[0] != 'Administrador') {
-                            ?>> <?php echo $row[0];
-                              } else {
-                                ?> style="display: none;" > <?php
-                                                                                  }
-                                                                                    ?></a>
+                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+
+                                                                                                                if ($row[1] != 'Administrador') {
+                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+
+                                                                                                                                                  } else {
+                                                                                                                                                    ?> style="display: none;" > <?php
+                                                                                                                                                                              }
+                                                                                                                                                                                ?></input type="submit">
+
+
+                        </form>
                       <?php
+
                       }
                       ?>
                     </li>
                   </ul>
+
+
                 </div>
               </li>
               <li>

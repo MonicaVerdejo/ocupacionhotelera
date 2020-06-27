@@ -21,6 +21,10 @@ $db = new DB();
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Site Icons -->
     <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
         #signup {
             padding: 0px 25px 25px;
@@ -87,7 +91,7 @@ $db = new DB();
 
                             <li>
                                 <a href="admin_graficas.php">
-                                <i class="fas fa-chart-pie"></i>
+                                    <i class="fas fa-chart-pie"></i>
                                     <span>Graficas</span>
                                 </a>
                             </li>
@@ -101,25 +105,34 @@ $db = new DB();
                                     <ul>
                                         <li>
                                             <?php
-                                            $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
+                                            $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
                                             $sentencia->execute();
 
                                             foreach ($sentencia as $row) {
 
                                             ?>
-                                                <a <?php
+                                                <form class="text-center" action="buscarid.php" method="POST">
 
-                                                    if ($row[0] != 'Administrador') {
-                                                    ?>> <?php echo $row[0];
-                                                    } else {
-                                                        ?> style="display: none;" > <?php
-                                                                                }
-                                                                                    ?></a>
+                                                    <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+
+                                                                                                                                            if ($row[1] != 'Administrador') {
+                                                                                                                                            ?> value=" <?php echo $row[1]; ?>"><?php
+
+                                                                                                                                                } else {
+                                                                                                                                                    ?> style="display: none;" > <?php
+                                                                                                                                                                            }
+                                                                                                                                                                                ?></input type="submit">
+
+
+                                                </form>
                                             <?php
+
                                             }
                                             ?>
                                         </li>
                                     </ul>
+
+
                                 </div>
                             </li>
                             <li>
@@ -149,15 +162,12 @@ $db = new DB();
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <h2>Becarios</h2>
+                    <h2>Registro de becarios</h2>
                     <hr>
-                    <section>
-                        <label>Los becarios son aquellos usuarios que tendran acceso al sistema de forma remota, para de esta manera poder subir los
-                            datos de la ocupación hotelera correspondiente, recabando la información de manera presencial. Agrega al usuario de confianza.</label>
-                    </section>
+
                     <header style="position:relative; z-index:1;">
                         <div class="text-center alert alert-info">
-                            <h1 class="mt-2 mb-2">Registro de becarios</h1>
+                            <h1 class="mt-2 mb-2">OCUPACIÓN HOTELERA</h1>
                         </div>
                     </header>
 
@@ -296,6 +306,7 @@ $db = new DB();
 
                         </div>
                     </div>
+
                 </div>
 
             </main>
