@@ -1,16 +1,16 @@
-table{
+table#datos{
     margin-top: 4%;
     text-align: center;
-    border: 2px solid black;
-    padding: 15px;
+    border: 0.5px solid #cbc8c8ba;
+    padding: 10px;
 }
 
 
 td{
     background-color: snow;
-    border: 2px solid black;
+    border: 0.5px solid #cbc8c8ba; padding: 10px;
 }
 th, thead, tr{
-    background-color: slategrey;
-    border: 2px solid black;
+    padding: 10px;
+    border: 0.5px solid #cbc8c8ba;
 }

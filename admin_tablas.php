@@ -21,7 +21,18 @@ $db = new DB();
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Site Icons -->
     <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="public/TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="public/TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<style>
+    body{
+        background-color: #ededed;
+    }
+</style>
 </head>
 
 <body>
@@ -63,7 +74,7 @@ $db = new DB();
 
                             <li>
                                 <a href="admin_graficas.php">
-                                <i class="fas fa-chart-pie"></i>
+                                    <i class="fas fa-chart-pie"></i>
                                     <span>Graficas</span>
                                 </a>
                             </li>
@@ -162,9 +173,39 @@ $db = new DB();
                     </form>
 
                     <!-- TABLAS -->
-                    <div class="ml-3 container-fluid" id="datos">
 
-                    </div>
+                    <section id="tabla_resultado" class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title text-center">ESTADÍSTICA DE LA OCUPACIÓN HOTELERA</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="datos" class="text-center table table-bordered table-hover">
+                                          
+                                               
+                                               
+                                                
+                                               
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                    </section>
+
+
+
+
                 </div>
 
             </main>
@@ -194,3 +235,30 @@ $db = new DB();
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
 <script id="rendered-js" src="public/js/js.js"></script>
+
+<!-- jQuery -->
+<script src="public/TABLA/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="public/TABLA/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="public/TABLA/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="public/TABLA/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="public/TABLA/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="public/TABLA/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script>
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
+    $('#datos').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+});
+</script>
