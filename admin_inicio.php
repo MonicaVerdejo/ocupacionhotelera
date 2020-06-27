@@ -126,7 +126,7 @@ if (!isset($_SESSION['rol'])) {
       <main class="page-content">
         <div class="container-fluid">
           <h2>Datos</h2>
-          <!-- Correos de los hoteles-->
+          <!-- Container correos de los hoteles-->
           <div class="row">
           <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
             <div class="tabla card">
@@ -136,6 +136,7 @@ if (!isset($_SESSION['rol'])) {
                 <hr>
                 <div class="row">
                   <div class="resultados col-12 table-responsive ">
+                    <!--Tabla correo de los hoteles-->
                     <table class="table" align="center">
                         <tr class="bg-dark text-white">
                         </tr>
@@ -159,8 +160,8 @@ if (!isset($_SESSION['rol'])) {
                         <?php
                         }
                         ?>
-
                     </table>
+                    <!--Fin tabla correo de los hoteles-->
                     <br>
                   </div>
                 </div>
@@ -169,22 +170,29 @@ if (!isset($_SESSION['rol'])) {
                 </div>
               </div>
             </div>
-
           </div>
+          <!--Fin container correo de los hoteles-->
+          <!--Container status de registro-->
           <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
             <section id="tabla_resultado" class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-
                                 <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
                                 <hr>
                                 <div class="row">
-                                  <div class="col-4 form-group">
-                                      <label for="fecha_inicio">Fecha</label>
-                                      <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
-                                  </div>
+                                  <form method="POST" class="container mr-0">
+                                      <div class="row col-8  mt-2">
+                                          <div class="input-group mb-2">
+                                              <input name="consulta" type="text" class="form-control" placeholder="Hotel  "
+                                                  aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                              <div class="input-group-append">
+                                                  <button type="submit" class="btn btn-outline-secondary"
+                                                      type="button"> Buscar</button>
+                                              </div>
+                                          </div>
+                                      </div>
                                   <div class="resultados col-12 table-responsive ">
                                     <table class="table" align="center">
                                         <tr class="bg-dark text-white">
@@ -192,11 +200,16 @@ if (!isset($_SESSION['rol'])) {
                                         <tr class="bg-light text-dark">
                                             <th>Hotel</th>
                                             <th>Status</th>
+                                            <th>Fecha</th>
+
                                         </tr>
 
                                         <?php
 
-                                        $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario WHERE rol_id = '2'");
+                                        if (!empty($_POST['consulta'])) {
+
+                                        $q = $_POST['consulta'];
+                                        $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro WHERE Hotel LIKE '%" . $q . "%'");
                                         $sentencia->execute();
 
                                         foreach ($sentencia as $row) {
@@ -204,10 +217,29 @@ if (!isset($_SESSION['rol'])) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $row[0]; ?></td>
-                                                
+                                                <td>entregado</td>
+                                                <td><?php echo $row[1]; ?></td>
+
                                             </tr>
                                         <?php
                                         }
+                                        }
+                                        else{
+                                          $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro");
+                                          $sentencia->execute();
+
+                                          foreach ($sentencia as $row) {
+
+                                          ?>
+                                              <tr>
+                                                  <td><?php echo $row[0]; ?></td>
+                                                  <td>Entregado</td>
+                                                  <td><?php echo $row[1]; ?></td>
+
+                                              </tr>
+                                          <?php
+                                        }
+                                          }
                                         ?>
 
                                     </table>
@@ -215,38 +247,15 @@ if (!isset($_SESSION['rol'])) {
                                   </div>
                                 </div>
                                 <div class="card-footer">
-                                  <small class="text-muted">Correos registrados por los hoteles.</small>
+                                  <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
                                 </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
             </section>
         </div>
-                <div class="card-footer">
-                  <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
-                </div>
+
               </div>
             </div>
           </div>
-          <!--Fin grafica 2-->
-          <hr>
         </div>
-        </div>
-      </main>
-      <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
   </main>
