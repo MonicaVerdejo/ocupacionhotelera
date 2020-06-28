@@ -33,15 +33,15 @@ CREATE TABLE `becario` (
   `nombres` varchar(60) NOT NULL,
   `apellidos` varchar(60) NOT NULL,
   `correo` varchar(60) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `becario`
 --
 
-INSERT INTO `becario` (`id`, `nombres`, `apellidos`, `correo`, `password`) VALUES
-(4, 'Monica Priscila', 'Verdejo', 'becario1@outlook.com', '$2y$10$aMWIXAf6wW8BC');
+INSERT INTO `becario` (`nombres`, `apellidos`, `correo`, `password`) VALUES
+('Jose', 'Villasis', 'josepech0603@hotmail.com', '$2y$10$XCdoJs0fpOdSA.QMD8zgS.403xXRlWiSXBBlnHKjL0ik9nxAsUsD6');
 
 -- --------------------------------------------------------
 
@@ -81,6 +81,7 @@ INSERT INTO `registro` (`id`, `hotel`, `fecha_inicio`, `fecha_fin`, `habitacione
 (17, 'Ranchobubiña', '2018-03-16', '2018-04-08', 200, 0, 400, 24, 9, '350.00', '2020-06-27 04:39:53'),
 (18, 'Paraiso Beach', '2018-03-16', '2018-04-08', 400, 0, 700, 24, 20, '350.00', '2020-06-27 04:39:53'),
 (19, 'Geminis', '2018-03-16', '2018-04-08', 864, 0, 1700, 24, 36, '500.00', '2020-06-27 04:39:53');
+(20, 'Prueba', '2018-03-16', '2018-04-08', 864, 0, 1700, 24, 36, '500.00', '2020-02-27 04:39:53');
 
 -- --------------------------------------------------------
 

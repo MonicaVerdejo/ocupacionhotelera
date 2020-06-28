@@ -173,7 +173,7 @@ $db = new DB();
                     <form method="POST" class="container mr-0">
                         <div class="row col-5  mt-4">
                             <div class="input-group mb-3">
-                                <label for="caja_busqueda">Buscar:</label>
+                                <label for="caja_busqueda" class="mt-1">Buscar:</label>
                                 <input type="text" name="caja_busqueda" id="caja_busqueda" class="form-control" placeholder="">
 
                             </div>
@@ -193,7 +193,7 @@ $db = new DB();
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
-                                            <table id="datos" class="text-center table table-bordered table-hover">
+                                            <table id="datos" class="text-center table table-bordered table-hover table-responsive">
                                           
                                                
                                                
@@ -266,7 +266,7 @@ $(function() {
         "searching": false,
         "ordering": true,
         "info": true,
-        "autoWidth": false,
+        "autoWidth": true,
         "responsive": true,
     });
 });
