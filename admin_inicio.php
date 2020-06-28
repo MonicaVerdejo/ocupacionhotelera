@@ -190,70 +190,33 @@ $db=new DB();
                             <div class="card">
                                 <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
                                 <hr>
+
                                 <div class="row">
                                   <form method="POST" class="container mr-0">
                                       <div class="row col-8  mt-2">
                                           <div class="input-group mb-2">
-                                              <input name="consulta" type="text" class="form-control" placeholder="Hotel  "
-                                                  aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                          
+                                              <input name="consulta" id="caja_busqueda" type="text" class="form-control ml-3" placeholder="Buscar hotel...">
                                               <div class="input-group-append">
-                                                  <button type="submit" class="btn btn-outline-secondary"
-                                                      type="button"> Buscar</button>
+                                                  <!--<button type="submit" disabled class="btn btn-outline-secondary"
+                                                      type="button"> Buscar</button>--> 
                                               </div>
+
                                           </div>
                                       </div>
+                                  </form>
+                                 </div> 
+
                                   <div class="resultados col-12 table-responsive ">
-                                    <table class="table" align="center">
-                                        <tr class="bg-dark text-white">
-                                        </tr>
-                                        <tr class="bg-light text-dark">
-                                            <th>Hotel</th>
-                                            <th>Status</th>
-                                            <th>Fecha</th>
+                                    <table class="table" id="datos" align="center">
+                                      
 
-                                        </tr>
-
-                                        <?php
-
-                                        if (!empty($_POST['consulta'])) {
-
-                                        $q = $_POST['consulta'];
-                                        $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro WHERE Hotel LIKE '%" . $q . "%'");
-                                        $sentencia->execute();
-
-                                        foreach ($sentencia as $row) {
-
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $row[0]; ?></td>
-                                                <td>entregado</td>
-                                                <td><?php echo $row[1]; ?></td>
-
-                                            </tr>
-                                        <?php
-                                        }
-                                        }
-                                        else{
-                                          $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro");
-                                          $sentencia->execute();
-
-                                          foreach ($sentencia as $row) {
-
-                                          ?>
-                                              <tr>
-                                                  <td><?php echo $row[0]; ?></td>
-                                                  <td>Entregado</td>
-                                                  <td><?php echo $row[1]; ?></td>
-
-                                              </tr>
-                                          <?php
-                                        }
-                                          }
-                                        ?>
+                                  
 
                                     </table>
                                     <br>
                                   </div>
+
                                 </div>
                                 <div class="card-footer">
                                   <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
@@ -268,6 +231,9 @@ $db=new DB();
     </div>
     <!-- page-wrapper -->
   </main>
+  <script src="public/js/jquery-3.2.1.min.js"></script>
+  <script src="public/js/buscar_registro_mensual.js"></script>
+  
 </body>
 
 <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>

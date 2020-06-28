@@ -1,37 +1,53 @@
-<?php 
+<?php
 include_once('db.php');
 
 $db = new DB();
 
-if (isset($_POST['id']) && isset($_POST['year'])) {
-    $nuevaid=$_POST['id'];
-    $año = $_POST['year'];
+if (isset($_POST['id'])) {
+  # code...
+  $hotel=$_POST['id'];
+  if (!empty($_POST['year'])) {
+    $año=$_POST['year'];
   } else {
-   
-    $año = 2018;
+    $año=2018;
+    $hotel=$_POST['id'];
   }
+  
+} else {
+  echo ('error ');
+}
+
+
+  
+
  
+//asociar el hotel con la id para hacer consultas mas sencillas
 
-  
-  $consulta = $db->connect()->prepare("SELECT SUM(habitaciones_ocupadas * costo_hotel)  AS r FROM registro WHERE  YEAR(fecha_inicio)='2018'");
-  $consulta->execute();
-  $row = $consulta->fetch(PDO::FETCH_NUM);
-  $ingresos = $row[0];
-  
-  $consulta2 = $db->connect()->prepare("SELECT SUM(personas_nacionales + personas_extranjeras)  AS r FROM registro WHERE  YEAR(fecha_inicio)='2018'");
-  $consulta2->execute();
-  $row2 = $consulta2->fetch(PDO::FETCH_NUM);
-  $turismo = $row2[0];
-  
-  
-  $consulta3 = $db->connect()->prepare("SELECT hotel, Max(personas_nacionales + personas_extranjeras) AS r FROM registro WHERE YEAR(fecha_inicio)='2018'");
-  $consulta3->execute();
-  $row3 = $consulta3->fetch(PDO::FETCH_NUM);
-  $hotel = $row3[0];
-  
+$consulta = $db->connect()->prepare("SELECT SUM(habitaciones_ocupadas * costo_hotel)  AS r FROM registro WHERE  YEAR(fecha_inicio)='2018' and hotel=:hotel");
+$consulta->bindParam(':hotel', $_POST['id']);
+$consulta->execute();
+$row = $consulta->fetch(PDO::FETCH_NUM);
+$ingresos = $row[0];
 
 
+$consulta2 = $db->connect()->prepare("SELECT SUM(personas_nacionales + personas_extranjeras)  AS r FROM registro WHERE  YEAR(fecha_inicio)='$año' ");
+$consulta2->execute();
+$row2 = $consulta2->fetch(PDO::FETCH_NUM);
+$turismo = $row2[0];
 
+
+$consulta3 = $db->connect()->prepare("SELECT hotel, Max(personas_nacionales + personas_extranjeras) AS r FROM registro WHERE YEAR(fecha_inicio)='2018' ");
+$consulta3->execute();
+$row3 = $consulta3->fetch(PDO::FETCH_NUM);
+$hotel = $row3[0];
+
+
+//no se por que me dice siempre luna
+$email = $db->connect()->prepare("SELECT correo FROM usuario WHERE usuario='$hotel'");
+$email->bindParam($hotel,$_POST['id']);
+$email->execute();
+$row = $email->fetch(PDO::FETCH_NUM);
+$correo = $row[0];
 
 
 
@@ -125,7 +141,7 @@ $d = $data[11];
 ////////////////////////////////////////////////////GRAFICA DE VISITAS PARTE UNO////////////////////////////////////////////////// 
 $sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
-$enero= $sentencia->fetch(PDO::FETCH_ASSOC);
+$enero = $sentencia->fetch(PDO::FETCH_ASSOC);
 
 
 $sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=2 AND YEAR(fecha_inicio)='$año'");
@@ -160,15 +176,15 @@ $sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM
 $sentencia->execute();
 $septiembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=0 AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=10 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $octubre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)= AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=11 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $noviembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=2 AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT SUM(personas_nacionales)  AS r FROM registro WHERE MONTH(fecha_inicio)=12 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $diciembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -211,7 +227,7 @@ $sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FRO
 $sentencia->execute();
 $enero = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FROM registro WHERE MONTH(fecha_inicio)= AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FROM registro WHERE MONTH(fecha_inicio)=2 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $febrero = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -251,7 +267,7 @@ $sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FRO
 $sentencia->execute();
 $noviembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FROM registro WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FROM registro WHERE MONTH(fecha_inicio)=12 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $diciembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -292,14 +308,14 @@ $d2 = $data[11];
 $sentenciahotel = $db->connect()->prepare("SELECT COUNT(distinct usuario.id)-1 AS totalRows FROM usuario; ");
 $sentenciahotel->execute();
 $hoteles = $sentenciahotel->fetch(PDO::FETCH_ASSOC);
-$hoteles=$hoteles['totalRows'];
+$hoteles = $hoteles['totalRows'];
 //echo $hoteles;
 
 $sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/dias_vacaciones/num_habitaciones))/$hoteles)*100,2) AS r FROM `registro` WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $enero = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/dias_vacaciones/num_habitaciones))/$hoteles)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)= AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/dias_vacaciones/num_habitaciones))/$hoteles)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)=2 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $febrero = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -339,7 +355,7 @@ $sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/d
 $sentencia->execute();
 $noviembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-$sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/dias_vacaciones/num_habitaciones))/$hoteles)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año'");
+$sentencia = $db->connect()->prepare("SELECT ROUND(((sum(habitaciones_ocupadas/dias_vacaciones/num_habitaciones))/$hoteles)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)=12 AND YEAR(fecha_inicio)='$año'");
 $sentencia->execute();
 $diciembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -377,5 +393,13 @@ $d3 = $data[11];
 
 
 
-require_once 'admin_hotel.php';
-?>
+
+
+
+
+
+
+
+
+require 'admin_hotel.php';
+

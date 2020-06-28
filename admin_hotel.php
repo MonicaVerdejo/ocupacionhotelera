@@ -12,10 +12,27 @@ $db = new DB();
   <link rel="stylesheet" href="public/css/styles20.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <!-- Site Icons -->
   <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script src="Chartjs/Chart.min.js"></script>
+  <link rel="stylesheet" href="public/css/bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!--Chartjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="Chartjs/Chart.min.js"></script>
+
+  <style>
+    body {
+      background-color: #ededed;
+    }
+  </style>
 </head>
 
 <body>
@@ -87,8 +104,6 @@ $db = new DB();
                                                                                                                                                     ?> style="display: none;" > <?php
                                                                                                                                                                               }
                                                                                                                                                                                 ?></input type="submit">
-
-
                         </form>
                       <?php
 
@@ -96,7 +111,6 @@ $db = new DB();
                       ?>
                     </li>
                   </ul>
-
 
                 </div>
               </li>
@@ -127,96 +141,140 @@ $db = new DB();
 
       <main class="page-content">
         <div class="container-fluid">
-<!--Info general del hotel seleccionado-->
+          <h2>Hoteles registrados</h2>
+
+          <header style="position:relative; z-index:1;">
+            <div class="text-center alert alert-info">
+              <h1 class="mt-2 mb-2">OCUPACIÓN HOTELERA</h1>
+            </div>
+          </header>
+
+          <!--Info general del hotel seleccionado-->
           <div class="row">
             <div class="col-sm-3">
-              <div class="card" >
-                <img  class="card-img-top img-responsive" src="public/img_profile/defecto.png" alt="Card image">
+              <div class="card">
+                <img class="card-img-top img-responsive" src="public/img_profile/defecto.png" alt="Card image">
                 <div class="card-body">
-                  <h4 class="card-title"><?php require_once 'buscarid.php';
-                                        echo  $_POST['id']; ?></h4>
+                  <h1 class="card-title"><?php
+                                          echo  $_POST['id']; ?></h1>
                   <p class="card-text">Hotel</p>
-                  <a href="#" class="btn btn-primary">See Profile</a>
+                 <p><?php echo $correo; ?></p>
                 </div>
               </div>
             </div>
-
-
-            <!--Sección info general-->
             <div class="col-sm-9">
               <div class="row">
-                <div class="col-sm-4">
-                  <div class="card" style="width: 18 rem;">
-                    <div class="row card-body">
+                <!--Seccion de navbar-->
+                <div class="col-sm-12">
 
-                      <div class="col-sm-7">
-                        <h5 class="card-title">$<?php
-                                                echo $ingresos; ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand"><?php echo $_POST['id']; ?></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                      <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="#tabla">Información del hotel <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="#">Graficas</a>
+                        <a class="nav-item nav-link" href="#">Registros</a>
+
                       </div>
-                      <div class="col-sm-5"><img width="95" height="95" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
                     </div>
-                  </div>
-                </div>
-                
-                <div class="col-sm-4">
-                  <div class="card" style="width: 15rem;">
-                    <div class="row card-body">
-                      <div class="col-sm-6">
-                        <h5 class="card-title"><?php echo $turismo; ?> visitas</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Turismo</h6>
-                      </div>
-                      <div class="col-sm-6"><img width="100" height="100" src="public/img/turismo.jpg" alt="Turismo en ocupación hotelera"></div>
-                    </div>
-                  </div>
+                  </nav>
+
                 </div>
 
-                <div class="col-sm-4">
-                  <div class="card" style="width: 15rem;">
-                    <div class="row card-body">
-                      <div class="col-sm-6">
-                        <h5 class="card-title"><?php echo $hotel; ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Hotel más visitado</h6>
+
+
+
+                <!--Sección info general-->
+                <div class="col-sm-12 mt-5 mb-5">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="card" style="width: 18 rem;">
+                        <div class="row card-body">
+
+                          <div class="col-sm-6">
+                            <h5 class="card-title">$<?php 
+                                                    echo $ingresos; ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
+                          </div>
+                          <div class="col-sm-6"><img width="100" height="100" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
+                        </div>
                       </div>
-                      <div class="col-sm-6"><img width="100" height="100" src="public/img/favorito.png" alt="Hotel más visitado"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="card" style="width: 15rem;">
+                        <div class="row card-body">
+                          <div class="col-sm-6">
+                            <h5 class="card-title"><?php echo $turismo; ?> visitas</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Turismo</h6>
+                          </div>
+                          <div class="col-sm-6"><img width="100" height="100" src="public/img/turismo.jpg" alt="Turismo en ocupación hotelera"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="card" style="width: 15rem;">
+                        <div class="row card-body">
+                          <div class="col-sm-6">
+                            <h5 class="card-title"><?php echo $hotel; ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Hotel más visitado</h6>
+                          </div>
+                          <div class="col-sm-6"><img width="100" height="100" src="public/img/favorito.png" alt="Hotel más visitado"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="col-sm-12 col-lg-12 mt-5">
+                  <!--Formulario fecha de graficacion-->
+                  <form class="form-inline" action="buscarid.php" method="POST">
+                    <small id="passwordHelpInline" class="text-muted ml-2">
+                      Escoja el año que desea graficar.
+                    </small>
+                    <div class="form-group ml-2">
+
+                      <select id="year" class="" name="year">
+                        <?php
+                        for ($i = 2016; $i < 2023; $i++) {
+                          if ($i == 2016) {
+                            echo '<option value="' . $i . '" selected>' . $i . '</option>';
+                          } else {
+                            echo '<option value="' . $i . '" >' . $i . '</option>';
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <button class="btn btn-info ml-2" type="submit">Graficar</button>
+
+                  </form>
+                </div>
+
+
+
               </div>
             </div>
 
+
+
+
           </div>
-<!--Formulario fecha de graficacion-->
-<form class="form-inline" action="buscarid.php" method="POST">
-                <small id="passwordHelpInline" class="text-muted ml-2">
-                  Escoja el año que desea graficar.
-                </small>
-                <div class="form-group ml-2">
-
-                  <select id="year" class="form-control" name="year">
-                    <?php
-                    for ($i = 2016; $i < 2023; $i++) {
-                      if ($i == 2016) {
-                        echo '<option value="' . $i . '" selected>' . $i . '</option>';
-                      } else {
-                        echo '<option value="' . $i . '" >' . $i . '</option>';
-                      }
-                    }
-                    ?>
-                  </select>
-                </div>
-                <button class="btn btn-info ml-2" type="submit">Graficar</button>
 
 
 
-              </form>
+
 
           <!--fin info del hotel-->
-<hr>
-<!--Graficas-->
+          <hr>
+          <!--Graficas-->
 
-<div class="row">
-  <!-- Grafica Turismo/visitantes en champo-->
+          <div class="row">
+            <!-- Grafica Turismo/visitantes en champo-->
             <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
               <div class="tabla card">
 
@@ -247,7 +305,7 @@ $db = new DB();
                       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                       datasets: [{
                         label: "Turistas de México",
-                        
+
                         pointStyle: 'rectRot',
                         //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                         //backgroundColor: 'transparent',
@@ -285,30 +343,30 @@ $db = new DB();
                           'rgba(0, 99, 132, 0.8)',
                           'rgba(0, 99, 132, 0.8)'
                         ],
-                        
+
                         borderWidth: 2,
-                        
+
                         data: [<?php
                                 echo ($e1 . "," . $f1 . "," . $m1 . "," . $a1 . "," . $ma1 . "," . $j1 . "," . $jl1 . "," . $ag1 . "," . $s1 . "," . $o1 . "," . $n1 . "," . $d1);  ?>],
 
                       }, { //Turistas extranjeros
-                        label:"Turistas extranjeros",
+                        label: "Turistas extranjeros",
                         pointStyle: 'rectRot',
                         hoverBackgroundColor: '#1e856b',
                         hoverBorderColor: 'black',
                         backgroundColor: [
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)',
-                         'rgba(52, 203, 155, 0.58)'
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)',
+                          'rgba(52, 203, 155, 0.58)'
 
                         ],
                         borderColor: [
@@ -325,13 +383,13 @@ $db = new DB();
                           'rgba(13, 130, 112, 0.82)',
                           'rgba(13, 130, 112, 0.82)'
                         ],
-                       
+
                         borderWidth: 2,
 
                         data: [<?php
                                 echo ($e2 . "," . $f2 . "," . $m2 . "," . $a2 . "," . $ma2 . "," . $j2 . "," . $jl2 . "," . $ag2 . "," . $s2 . "," . $o2 . "," . $n2 . "," . $d2); ?>],
 
-                    }]
+                      }]
 
                     },
 

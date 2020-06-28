@@ -58,23 +58,7 @@ if ($sentencia->rowCount() > 0) {
         ";
     }
     
-    $salida .= "</tbody> 
-    <tfoot>
-    <tr>
-    <th>Hotel</th>
-    <th>Habitaciones <br> Ocupadas</th>
-    <th>Dias vacaciones</th>
-    <th>Numero de <br> habitaciones</th>
-    <th>Costo del hotel</th>
-    <th>Personas <br>Nacionales</th>
-    <th>Personas <br>Extranjeras</th>
-    <th>Fecha de Inicio</th>
-    <th>Fecha de Fin</th>
-    <th>%</th>
-    <th>Derrama economica</th>
-</tr>
-    </tfoot>
-    <tbody>";
+  
 } else {
     $salida .= "No existen coincidencias";
 }
