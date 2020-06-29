@@ -2,6 +2,7 @@
 require_once 'db.php';
 $db = new DB();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -24,8 +25,8 @@ $db = new DB();
   <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-<!--Chartjs-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <!--Chartjs-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script src="Chartjs/Chart.min.js"></script>
 
   <style>
@@ -87,23 +88,23 @@ $db = new DB();
                   <ul>
                     <li>
                       <?php
-                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
+                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
                       $sentencia->execute();
 
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <form class="text-center" action="buscarid.php" method="POST">
+                        <form class="text-center" action="buscar_id.php" method="POST">
 
-                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+                          <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
-                                                                                                                if ($row[1] != 'Administrador') {
-                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+                                                                                                                      if ($row[0] != 'Administrador') {
+                                                                                                                      ?> value=" <?php echo $row[0]; ?>"><?php
 
-                                                                                                                                                  } else {
-                                                                                                                                                    ?> style="display: none;" > <?php
-                                                                                                                                                                              }
-                                                                                                                                                                                ?></input type="submit">
+                                                                                                                                                        } else {
+                                                                                                                                                          ?> style="display: none;" > <?php
+                                                                                                                                                                                    }
+                                                                                                                                                                                      ?></input>
                         </form>
                       <?php
 
@@ -140,7 +141,7 @@ $db = new DB();
 
 
       <main class="page-content">
-        <div class="container-fluid">
+        <div class="container-fluid" id="infogeneral">
           <h2>Hoteles registrados</h2>
 
           <header style="position:relative; z-index:1;">
@@ -150,15 +151,17 @@ $db = new DB();
           </header>
 
           <!--Info general del hotel seleccionado-->
-          <div class="row">
+          <div class="row" >
             <div class="col-sm-3">
               <div class="card">
                 <img class="card-img-top img-responsive" src="public/img_profile/defecto.png" alt="Card image">
                 <div class="card-body">
                   <h1 class="card-title"><?php
-                                          echo  $_POST['id']; ?></h1>
+                                          echo  $_POST['hotel']; ?></h1>
                   <p class="card-text">Hotel</p>
-                 <p><?php echo $correo; ?></p>
+                  <p class="card-text"><?php
+                                        echo $correo; ?></p>
+
                 </div>
               </div>
             </div>
@@ -168,15 +171,15 @@ $db = new DB();
                 <div class="col-sm-12">
 
                   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand"><?php echo $_POST['id']; ?></a>
+                    <a class="navbar-brand"><?php echo $hotel; ?></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                       <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="#tabla">Información del hotel <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" href="#">Graficas</a>
-                        <a class="nav-item nav-link" href="#">Registros</a>
+                        <a class="nav-item nav-link active" href="#infogeneral">Información del hotel <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="#graficas">Graficas</a>
+                        <a class="nav-item nav-link" href="#tabla">Registros</a>
 
                       </div>
                     </div>
@@ -195,7 +198,7 @@ $db = new DB();
                         <div class="row card-body">
 
                           <div class="col-sm-6">
-                            <h5 class="card-title">$<?php 
+                            <h5 class="card-title">$<?php
                                                     echo $ingresos; ?></h5>
                             <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
                           </div>
@@ -271,329 +274,426 @@ $db = new DB();
 
           <!--fin info del hotel-->
           <hr>
-          <!--Graficas-->
 
-          <div class="row">
-            <!-- Grafica Turismo/visitantes en champo-->
-            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
-              <div class="tabla card">
+          <div id="graficas">
 
-                <div>
-                  <h1 class="ml-3 mt-3 card-title">Turismo</h1>
+            <!--Graficas-->
 
-                  <hr>
-                  <div class="row">
-                    <div class="resultados col-12">
-                      <canvas id="grafico" style="width:80%; margin-bottom:10%;"></canvas>
+            <h2>Gráficas <?php echo $hotel;  ?> </h2>
+            <hr>
+
+            <div class="row">
+              <!-- Grafica Turismo/visitantes en champo-->
+              <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+                <div class="tabla card">
+
+                  <div>
+                    <h1 class="ml-3 mt-3 card-title">Turismo</h1>
+
+                    <hr>
+                    <div class="row">
+                      <div class="resultados col-12">
+                        <canvas id="grafico" style="width:80%; margin-bottom:10%;"></canvas>
+                      </div>
                     </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Actividad turística comprende la cuantificación de las visitas, las cuales se dividen en visitantes de otros países o extranjeros, y los compatriotas.</small>
+                    </div>
+
+
                   </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Actividad turística comprende la cuantificación de las visitas, las cuales se dividen en visitantes de otros países o extranjeros, y los compatriotas.</small>
-                  </div>
+
+                  <script>
+                    var contexto = document.getElementById("grafico").getContext("2d");
+                    var grafico = new Chart(contexto, {
+
+                      type: "line", //line,bar,pie,bubble,doughnut,polarArea
 
 
-                </div>
+                      data: {
+                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        datasets: [{
+                          label: "Turistas de México",
 
-                <script>
-                  var contexto = document.getElementById("grafico").getContext("2d");
-                  var grafico = new Chart(contexto, {
+                          pointStyle: 'rectRot',
+                          //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                          //backgroundColor: 'transparent',
+                          //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                          //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                          //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                          hoverBackgroundColor: '#c9effc',
+                          hoverBorderColor: 'black',
+                          backgroundColor: [
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)',
+                            'rgba(247, 248, 248, 0.55)'
 
-                    type: "line", //line,bar,pie,bubble,doughnut,polarArea
+                          ],
+                          borderColor: [
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(0, 99, 132, 0.8)'
+                          ],
 
+                          borderWidth: 2,
 
-                    data: {
-                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                      datasets: [{
-                        label: "Turistas de México",
+                          data: [<?php
+                                  echo ($e1 . "," . $f1 . "," . $m1 . "," . $a1 . "," . $ma1 . "," . $j1 . "," . $jl1 . "," . $ag1 . "," . $s1 . "," . $o1 . "," . $n1 . "," . $d1);  ?>],
 
-                        pointStyle: 'rectRot',
-                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
-                        //backgroundColor: 'transparent',
-                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
-                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
-                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
-                        hoverBackgroundColor: '#c9effc',
-                        hoverBorderColor: 'black',
-                        backgroundColor: [
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)',
-                          'rgba(247, 248, 248, 0.55)'
+                        }, { //Turistas extranjeros
+                          label: "Turistas extranjeros",
+                          pointStyle: 'rectRot',
+                          hoverBackgroundColor: '#1e856b',
+                          hoverBorderColor: 'black',
+                          backgroundColor: [
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)',
+                            'rgba(52, 203, 155, 0.58)'
 
-                        ],
-                        borderColor: [
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(0, 99, 132, 0.8)'
-                        ],
+                          ],
+                          borderColor: [
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)',
+                            'rgba(13, 130, 112, 0.82)'
+                          ],
 
-                        borderWidth: 2,
+                          borderWidth: 2,
 
-                        data: [<?php
-                                echo ($e1 . "," . $f1 . "," . $m1 . "," . $a1 . "," . $ma1 . "," . $j1 . "," . $jl1 . "," . $ag1 . "," . $s1 . "," . $o1 . "," . $n1 . "," . $d1);  ?>],
+                          data: [<?php
+                                  echo ($e2 . "," . $f2 . "," . $m2 . "," . $a2 . "," . $ma2 . "," . $j2 . "," . $jl2 . "," . $ag2 . "," . $s2 . "," . $o2 . "," . $n2 . "," . $d2); ?>],
 
-                      }, { //Turistas extranjeros
-                        label: "Turistas extranjeros",
-                        pointStyle: 'rectRot',
-                        hoverBackgroundColor: '#1e856b',
-                        hoverBorderColor: 'black',
-                        backgroundColor: [
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)',
-                          'rgba(52, 203, 155, 0.58)'
-
-                        ],
-                        borderColor: [
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)',
-                          'rgba(13, 130, 112, 0.82)'
-                        ],
-
-                        borderWidth: 2,
-
-                        data: [<?php
-                                echo ($e2 . "," . $f2 . "," . $m2 . "," . $a2 . "," . $ma2 . "," . $j2 . "," . $jl2 . "," . $ag2 . "," . $s2 . "," . $o2 . "," . $n2 . "," . $d2); ?>],
-
-                      }]
-
-                    },
-
-                    options: {
-                      responsive: true,
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true
-                          }
                         }]
+
+                      },
+
+                      options: {
+                        responsive: true,
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                          }]
+                        }
                       }
-                    }
-                  });
-                </script>
+                    });
+                  </script>
+                </div>
+              </div>
+
+              <!--Grafica visitas mensuales-->
+              <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+                <div class="tabla card">
+
+                  <div>
+                    <h1 class="ml-3 mt-3 card-title">Ocupación</h1>
+
+                    <hr>
+                    <div class="row">
+                      <div class="resultados col-12">
+                        <canvas id="grafico2" style="width:80%; margin-bottom:10%;"></canvas>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">El porcentaje de ocupación que promedian nuestros hoteles de forma mensual</small>
+                    </div>
+
+
+                  </div>
+
+                  <script>
+                    var contexto = document.getElementById("grafico2").getContext("2d");
+                    var grafico = new Chart(contexto, {
+
+                      type: "horizontalBar", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                      data: {
+                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        datasets: [{
+                          label: "Porcentaje de ocupacion mensual",
+                          //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                          //backgroundColor: 'transparent',
+                          //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                          //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                          //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                          hoverBackgroundColor: '#6185ae',
+                          hoverBorderColor: 'black',
+
+                          backgroundColor: [
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(30, 99, 132, 0.8)',
+                            'rgba(60, 99, 132, 0.8)',
+                            'rgba(90, 99, 132, 0.8)',
+                            'rgba(120, 99, 132, 0.8)',
+                            'rgba(150, 99, 132, 0.8)',
+                            'rgba(160, 99, 132, 0.8)',
+                            'rgba(180, 99, 132, 0.8)',
+                            'rgba(210, 99, 132, 0.8)',
+                            'rgba(240, 99, 132, 0.8)',
+                            'rgba(270, 99, 130, 0.8)',
+                            'rgba(300, 100, 138, 0.8)'
+                          ],
+                          borderColor: [
+                            'rgba(0, 99, 132, 1)',
+                            'rgba(30, 99, 132, 1)',
+                            'rgba(60, 99, 132, 1)',
+                            'rgba(90, 99, 132, 1)',
+                            'rgba(120, 99, 132, 1)',
+                            'rgba(150, 99, 132, 1)',
+                            'rgba(160, 90, 132, 1)',
+                            'rgba(180, 99, 132, 1)',
+                            'rgba(210, 99, 132, 1)',
+                            'rgba(240, 99, 132, 1)',
+                            'rgba(270, 99, 132, 1)',
+                            'rgba(300, 99, 132, 1)'
+                          ],
+                          borderWidth: 2,
+
+                          data: [<?php
+                                  echo ($e3 . "," . $f3 . "," . $m3 . "," . $a3 . "," . $ma3 . "," . $j3 . "," . $jl3 . "," . $ag3 . "," . $s3 . "," . $o3 . "," . $n3 . "," . $d3); ?>],
+
+                        }]
+
+                      },
+
+                      options: {
+                        responsive: true,
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                          }]
+                        }
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+              <!--Fin grafica 2-->
+            </div>
+            <!--Fin graficas-->
+
+            <!--Segundo row de grafica-->
+            <div class="row">
+              <div class="col-12">
+                <div class="tabla card">
+
+                  <div>
+                    <h1 class="ml-3 mt-3 card-title">Derrama económica</h1>
+
+                    <hr>
+                    <div class="row">
+                      <div class="resultados col-12">
+                        <canvas id="grafico3" style="width:80%; margin-bottom:10%;"></canvas>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">El concepto de la derrama económica motivada por la actividad turística comprende la cuantificación del valor monetario total promedio (en pesos corrientes), de los gastos que como mínimo son realizados por los visitantes con pernocta a los principales centros turísticos del Estado durante el periodo de análisis.</small>
+                    </div>
+
+
+                  </div>
+
+                  <script>
+                    var contexto = document.getElementById("grafico3").getContext("2d");
+                    var grafico = new Chart(contexto, {
+
+                      type: "bar", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                      data: {
+                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        datasets: [{
+                          label: "Derrama economica",
+                          //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                          //backgroundColor: 'transparent',
+                          //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                          //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                          //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                          hoverBackgroundColor: '#6185ae',
+                          hoverBorderColor: 'black',
+
+                          backgroundColor: [
+                            'rgba(0, 99, 132, 0.8)',
+                            'rgba(30, 99, 132, 0.8)',
+                            'rgba(60, 99, 132, 0.8)',
+                            'rgba(90, 99, 132, 0.8)',
+                            'rgba(120, 99, 132, 0.8)',
+                            'rgba(150, 99, 132, 0.8)',
+                            'rgba(160, 99, 132, 0.8)',
+                            'rgba(180, 99, 132, 0.8)',
+                            'rgba(210, 99, 132, 0.8)',
+                            'rgba(240, 99, 132, 0.8)',
+                            'rgba(270, 99, 130, 0.8)',
+                            'rgba(300, 100, 138, 0.8)'
+                          ],
+                          borderColor: [
+                            'rgba(0, 99, 132, 1)',
+                            'rgba(30, 99, 132, 1)',
+                            'rgba(60, 99, 132, 1)',
+                            'rgba(90, 99, 132, 1)',
+                            'rgba(120, 99, 132, 1)',
+                            'rgba(150, 99, 132, 1)',
+                            'rgba(160, 90, 132, 1)',
+                            'rgba(180, 99, 132, 1)',
+                            'rgba(210, 99, 132, 1)',
+                            'rgba(240, 99, 132, 1)',
+                            'rgba(270, 99, 132, 1)',
+                            'rgba(300, 99, 132, 1)'
+                          ],
+                          borderWidth: 2,
+
+                          data: [<?php
+                                  echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+
+                        }]
+
+                      },
+
+                      options: {
+                        responsive: true,
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                          }]
+                        }
+                      }
+                    });
+                  </script>
+                </div>
               </div>
             </div>
 
-            <!--Grafica visitas mensuales-->
-            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
-              <div class="tabla card">
 
-                <div>
-                  <h1 class="ml-3 mt-3 card-title">Ocupación</h1>
-
-                  <hr>
-                  <div class="row">
-                    <div class="resultados col-12">
-                      <canvas id="grafico2" style="width:80%; margin-bottom:10%;"></canvas>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">El porcentaje de ocupación que promedian nuestros hoteles de forma mensual</small>
-                  </div>
-
-
-                </div>
-
-                <script>
-                  var contexto = document.getElementById("grafico2").getContext("2d");
-                  var grafico = new Chart(contexto, {
-
-                    type: "horizontalBar", //line,bar,pie,bubble,doughnut,polarArea
-
-
-                    data: {
-                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                      datasets: [{
-                        label: "Porcentaje de ocupacion mensual",
-                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
-                        //backgroundColor: 'transparent',
-                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
-                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
-                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
-                        hoverBackgroundColor: '#6185ae',
-                        hoverBorderColor: 'black',
-
-                        backgroundColor: [
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(30, 99, 132, 0.8)',
-                          'rgba(60, 99, 132, 0.8)',
-                          'rgba(90, 99, 132, 0.8)',
-                          'rgba(120, 99, 132, 0.8)',
-                          'rgba(150, 99, 132, 0.8)',
-                          'rgba(160, 99, 132, 0.8)',
-                          'rgba(180, 99, 132, 0.8)',
-                          'rgba(210, 99, 132, 0.8)',
-                          'rgba(240, 99, 132, 0.8)',
-                          'rgba(270, 99, 130, 0.8)',
-                          'rgba(300, 100, 138, 0.8)'
-                        ],
-                        borderColor: [
-                          'rgba(0, 99, 132, 1)',
-                          'rgba(30, 99, 132, 1)',
-                          'rgba(60, 99, 132, 1)',
-                          'rgba(90, 99, 132, 1)',
-                          'rgba(120, 99, 132, 1)',
-                          'rgba(150, 99, 132, 1)',
-                          'rgba(160, 90, 132, 1)',
-                          'rgba(180, 99, 132, 1)',
-                          'rgba(210, 99, 132, 1)',
-                          'rgba(240, 99, 132, 1)',
-                          'rgba(270, 99, 132, 1)',
-                          'rgba(300, 99, 132, 1)'
-                        ],
-                        borderWidth: 2,
-
-                        data: [<?php
-                                echo ($e3 . "," . $f3 . "," . $m3 . "," . $a3 . "," . $ma3 . "," . $j3 . "," . $jl3 . "," . $ag3 . "," . $s3 . "," . $o3 . "," . $n3 . "," . $d3); ?>],
-
-                      }]
-
-                    },
-
-                    options: {
-                      responsive: true,
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true
-                          }
-                        }]
-                      }
-                    }
-                  });
-                </script>
-              </div>
-            </div>
-            <!--Fin grafica 2-->
           </div>
-          <!--Fin graficas-->
-
-          <!--Segundo row de grafica-->
-          <div class="row">
-            <div class="col-12">
-              <div class="tabla card">
-
-                <div>
-                  <h1 class="ml-3 mt-3 card-title">Derrama económica</h1>
-
-                  <hr>
-                  <div class="row">
-                    <div class="resultados col-12">
-                      <canvas id="grafico3" style="width:80%; margin-bottom:10%;"></canvas>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">El concepto de la derrama económica motivada por la actividad turística comprende la cuantificación del valor monetario total promedio (en pesos corrientes), de los gastos que como mínimo son realizados por los visitantes con pernocta a los principales centros turísticos del Estado durante el periodo de análisis.</small>
-                  </div>
 
 
+
+
+
+          <div id="tabla">
+
+            <!--TABLA DE REGISTRO DEL HOTEL SELECCIONADO-->
+
+            <h2>Tabla de registros</h2>
+
+            <header style="position:relative; z-index:1;">
+              <div class="text-center alert alert-info">
+                <h1 class="mt-2 mb-2">OCUPACIÓN HOTELERA</h1>
+              </div>
+            </header>
+
+            <!-- PRUEBA DE CONSULTA CON JQUERY-->
+            <form class="form-inline mt-4 mb-2 mr-0 txt-center container" method="POST">
+              <div class="row  col-10">
+                <div class="col-4 form-group">
+                  <label for="fecha_inicio">Fecha Inicio:</label>
+                  <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                </div>
+                <div class="col-4 form-group">
+                  <label for="fecha_final">Fecha Final:</label>
+                  <input type="date" class="form-control" id="fecha_final" name="fecha_final" required>
                 </div>
 
-                <script>
-                  var contexto = document.getElementById("grafico3").getContext("2d");
-                  var grafico = new Chart(contexto, {
 
-                    type: "bar", //line,bar,pie,bubble,doughnut,polarArea
-
-
-                    data: {
-                      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                      datasets: [{
-                        label: "Derrama economica",
-                        //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
-                        //backgroundColor: 'transparent',
-                        //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
-                        //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
-                        //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
-                        hoverBackgroundColor: '#6185ae',
-                        hoverBorderColor: 'black',
-
-                        backgroundColor: [
-                          'rgba(0, 99, 132, 0.8)',
-                          'rgba(30, 99, 132, 0.8)',
-                          'rgba(60, 99, 132, 0.8)',
-                          'rgba(90, 99, 132, 0.8)',
-                          'rgba(120, 99, 132, 0.8)',
-                          'rgba(150, 99, 132, 0.8)',
-                          'rgba(160, 99, 132, 0.8)',
-                          'rgba(180, 99, 132, 0.8)',
-                          'rgba(210, 99, 132, 0.8)',
-                          'rgba(240, 99, 132, 0.8)',
-                          'rgba(270, 99, 130, 0.8)',
-                          'rgba(300, 100, 138, 0.8)'
-                        ],
-                        borderColor: [
-                          'rgba(0, 99, 132, 1)',
-                          'rgba(30, 99, 132, 1)',
-                          'rgba(60, 99, 132, 1)',
-                          'rgba(90, 99, 132, 1)',
-                          'rgba(120, 99, 132, 1)',
-                          'rgba(150, 99, 132, 1)',
-                          'rgba(160, 90, 132, 1)',
-                          'rgba(180, 99, 132, 1)',
-                          'rgba(210, 99, 132, 1)',
-                          'rgba(240, 99, 132, 1)',
-                          'rgba(270, 99, 132, 1)',
-                          'rgba(300, 99, 132, 1)'
-                        ],
-                        borderWidth: 2,
-
-                        data: [<?php
-                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
-
-                      }]
-
-                    },
-
-                    options: {
-                      responsive: true,
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true
-                          }
-                        }]
-                      }
-                    }
-                  });
-                </script>
               </div>
-            </div>
+            </form>
+            <hr>
+            <!-- TABLAS -->
+
+            <section id="tabla_resultado" class="content">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title text-center">ESTADÍSTICA DE LA OCUPACIÓN HOTELERA</h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <table id="datos" class="text-center table table-bordered table-hover table-responsive">
+
+
+
+
+
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.container-fluid -->
+            </section>
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </main>
 
@@ -607,7 +707,7 @@ $db = new DB();
   <!-- page-wrapper -->
   </main>
 </body>
-
+<script src="public/js/buscar_idfetch.js"></script>
 <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>

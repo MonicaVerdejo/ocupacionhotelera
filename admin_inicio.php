@@ -29,8 +29,8 @@ $db=new DB();
   <main>
 
     <div class="page-wrapper chiller-theme toggled">
-       <!--Sidebar-->
-       <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+         <!--Sidebar-->
+         <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
       </a>
       <nav id="sidebar" class="sidebar-wrapper">
@@ -83,9 +83,9 @@ $db=new DB();
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <form class="text-center" action="buscarid.php" method="POST">
+                        <form class="text-center" action="buscar_id.php" method="POST">
 
-                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
                                                                                                                 if ($row[1] != 'Administrador') {
                                                                                                                 ?> value=" <?php echo $row[1]; ?>"><?php
@@ -93,9 +93,7 @@ $db=new DB();
                                                                                                                                                   } else {
                                                                                                                                                     ?> style="display: none;" > <?php
                                                                                                                                                                               }
-                                                                                                                                                                                ?></input type="submit">
-
-
+                                                                                                                                                                                ?></input>
                         </form>
                       <?php
 
@@ -103,7 +101,6 @@ $db=new DB();
                       ?>
                     </li>
                   </ul>
-
 
                 </div>
               </li>
