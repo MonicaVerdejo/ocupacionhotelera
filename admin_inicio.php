@@ -10,7 +10,7 @@ if (!isset($_SESSION['rol'])) {
   }
 }
 
-$db=new DB();
+$db = new DB();
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -23,14 +23,24 @@ $db=new DB();
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
   <!-- Site Icons -->
   <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+<!-- Theme style -->
+<link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #ededed;
+    }
+  </style>
 </head>
 
 <body>
   <main>
 
     <div class="page-wrapper chiller-theme toggled">
-   <!--Sidebar-->
-   <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+      <!--Sidebar-->
+      <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
       </a>
       <nav id="sidebar" class="sidebar-wrapper">
@@ -92,8 +102,8 @@ $db=new DB();
 
                                                                                                                                                       } else {
                                                                                                                                                         ?> style="display: none;" > <?php
-                                                                                                                                                                                    }
-                                                                                                                                                                                      ?></input>
+                                                                                                                                                                                  }
+                                                                                                                                                                                    ?></input>
                         </form>
                       <?php
 
@@ -131,24 +141,44 @@ $db=new DB();
 
       <main class="page-content">
         <div class="container-fluid">
-          <h2>Datos</h2>
+          <div class="row">
+            <div class="col-12">
+            <div class="row">
+              <div class="col-10"> <h2 class="mt-3">Datos</h2></div>
+              <div class="col-2"> <img width="130" height="110" class="img-responsive mr-0 mt-0" src="public/img/h_ayuntamiento.svg" alt="Honorable ayuntamiento de Champotón"></div>
+            </div>  
+   
+            </div>
+            <div class="col-12">
+              <header style="position:relative; z-index:1;">
+                <div class="text-center alert alert-info">
+                  <h1 class="mt-2 mb-2">OCUPACIÓN HOTELERA</h1>
+                </div>
+              </header>
+            </div>
+
+
+          </div>
+
+
           <!-- Container correos de los hoteles-->
           <div class="row">
-          <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
-            <div class="tabla card">
-              <div>
-
+            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+              <div class="tabla card">
                 <h3 class="ml-3 mt-3 card-title "><img src="public/img/mail.svg" height="50" width="50"> Correos de hoteles </h3>
-                <hr>
-                <div class="row">
-                  <div class="resultados col-12 table-responsive ">
-                    <!--Tabla correo de los hoteles-->
-                    <table class="table" align="center">
+                <div>
+
+                  
+                  <hr>
+                  <div class="row">
+                    <div class="resultados col-12 table-responsive ">
+                      <!--Tabla correo de los hoteles-->
+                      <table class="table" align="center">
                         <tr class="bg-dark text-white">
                         </tr>
                         <tr class="bg-light text-dark">
-                            <th>Hotel</th>
-                            <th>Correo</th>
+                          <th>Hotel</th>
+                          <th>Correo</th>
                         </tr>
 
                         <?php
@@ -159,78 +189,78 @@ $db=new DB();
                         foreach ($sentencia as $row) {
 
                         ?>
-                            <tr>
-                                <td><?php echo $row[0]; ?></td>
-                                <td><?php echo $row[1]; ?></td>
-                            </tr>
+                          <tr>
+                            <td><?php echo $row[0]; ?></td>
+                            <td><?php echo $row[1]; ?></td>
+                          </tr>
                         <?php
                         }
                         ?>
-                    </table>
-                    <!--Fin tabla correo de los hoteles-->
-                    <br>
+                      </table>
+                      <!--Fin tabla correo de los hoteles-->
+                      <br>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Correos registrados por los hoteles.</small>
                   </div>
                 </div>
-                <div class="card-footer">
-                  <small class="text-muted">Correos registrados por los hoteles.</small>
-                </div>
               </div>
             </div>
-          </div>
-          <!--Fin container correo de los hoteles-->
-          <!--Container status de registro-->
-          <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
-            <section id="tabla_resultado" class="content">
+            <!--Fin container correo de los hoteles-->
+            <!--Container status de registro-->
+            <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
+              <section id="tabla_resultado" class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
-                                <hr>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
+                        <hr>
 
-                                <div class="row">
-                                  <form method="POST" class="container mr-0">
-                                      <div class="row col-8  mt-2">
-                                          <div class="input-group mb-2">
-                                          
-                                              <input name="consulta" id="caja_busqueda" type="text" class="form-control ml-3" placeholder="Buscar hotel...">
-                                              <div class="input-group-append">
-                                                  <!--<button type="submit" disabled class="btn btn-outline-secondary"
-                                                      type="button"> Buscar</button>--> 
-                                              </div>
+                        <div class="row">
+                          <form method="POST" class="container mr-0">
+                            <div class="row col-8  mt-2">
+                              <div class="input-group mb-2">
 
-                                          </div>
-                                      </div>
-                                  </form>
-                                 </div> 
-
-                                  <div class="resultados col-12 table-responsive ">
-                                    <table class="table" id="datos" align="center">
-                                      
-
-                                  
-
-                                    </table>
-                                    <br>
-                                  </div>
-
+                                <input name="consulta" id="caja_busqueda" type="text" class="form-control ml-3" placeholder="Buscar hotel...">
+                                <div class="input-group-append">
+                                  <!--<button type="submit" disabled class="btn btn-outline-secondary"
+                                                      type="button"> Buscar</button>-->
                                 </div>
-                                <div class="card-footer">
-                                  <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
-                                </div>
-            </section>
-        </div>
 
-              </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="resultados col-12 table-responsive ">
+                          <table class="table" id="datos" align="center">
+
+
+
+
+                          </table>
+                          <br>
+                        </div>
+
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-muted">Hoteles que ya hicieron su registro mensual</small>
+                      </div>
+              </section>
             </div>
+
           </div>
         </div>
+    </div>
+    </div>
     </div>
     <!-- page-wrapper -->
   </main>
   <script src="public/js/jquery-3.2.1.min.js"></script>
   <script src="public/js/buscar_registro_mensual.js"></script>
-  
+
 </body>
 
 <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>

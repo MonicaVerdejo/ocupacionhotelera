@@ -11,7 +11,7 @@ if (!empty($_POST['consulta'])) {
 
     $q = $_POST['consulta'];
 
-    $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro WHERE EXTRACT(month from fecha_fin) = EXTRACT(month FROM (NOW())) AND EXTRACT(YEAR from fecha_fin) = EXTRACT(YEAR FROM (NOW())) AND hotel LIKE '$q%'");
+    $sentencia = $db->connect()->prepare("SELECT hotel,fecha_registro FROM registro WHERE EXTRACT(month from fecha_fin) = EXTRACT(month FROM (NOW())) AND EXTRACT(YEAR from fecha_fin) = EXTRACT(YEAR FROM (NOW())) AND hotel LIKE '%$q%'");
     $sentencia->execute();
 }
 
