@@ -41,7 +41,7 @@ $row2 = $consulta2->fetch(PDO::FETCH_ASSOC);
 $turismo = $row2['turismo'] ?? 'Turistas';
 
 //consulta general
-$stmt = $db->connect()->prepare("SELECT habitaciones_ocupadas,dias_vacaciones,num_habitaciones FROM registro where hotel ='$hotel'");
+$stmt = $db->connect()->prepare("SELECT habitaciones_ocupadas,dias_vacaciones,num_habitaciones FROM registro where YEAR(fecha_inicio)='$año' and hotel ='$hotel'");
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $porcentaje = round((($row['habitaciones_ocupadas'] / $row['dias_vacaciones'] / $row['num_habitaciones']) * 100), 3);
