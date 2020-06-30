@@ -99,12 +99,12 @@ $db = new DB();
                           <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
                                                                                                                       if ($row[0] != 'Administrador') {
-                                                                                                                      ?> value=" <?php echo $row[0]; ?>"><?php
+                                                                                                                      ?> value="<?php echo $row[0]; ?>"><?php
 
-                                                                                                                                                        } else {
-                                                                                                                                                          ?> style="display: none;" > <?php
-                                                                                                                                                                                    }
-                                                                                                                                                                                      ?></input>
+                                                                                                                                                      } else {
+                                                                                                                                                        ?> style="display: none;" > <?php
+                                                                                                                                                                                  }
+                                                                                                                                                                                    ?></input>
                         </form>
                       <?php
 
@@ -151,22 +151,20 @@ $db = new DB();
           </header>
 
           <!--Info general del hotel seleccionado-->
-          <div class="row" >
+          <div class="row">
             <div class="col-sm-3">
               <div class="card">
-                <img class="card-img-top img-responsive" src="public/img_profile/defecto.png" alt="Card image">
+                <img class="card-img-top img-responsive" src="public/img_profile/<?php echo $imgPerfil; ?>" alt="Card image">
                 <div class="card-body">
-                  <h1 class="card-title"><?php
-                                          echo  $_POST['hotel']; ?></h1>
+                  <h1 class="card-title"><?php echo  $_POST['hotel']; ?></h1>
                   <p class="card-text">Hotel</p>
-                  <p class="card-text"><?php
-                                        echo $correo; ?></p>
-
+                  <p class="card-text"><?php echo $correo; ?></p>
                 </div>
               </div>
             </div>
             <div class="col-sm-9">
               <div class="row">
+
                 <!--Seccion de navbar-->
                 <div class="col-sm-12">
 
@@ -193,38 +191,41 @@ $db = new DB();
                 <!--Sección info general-->
                 <div class="col-sm-12 mt-5 mb-5">
                   <div class="row">
+                    <!--INGRESOS-->
                     <div class="col-sm-4">
                       <div class="card" style="width: 18 rem;">
                         <div class="row card-body">
-
                           <div class="col-sm-6">
                             <h5 class="card-title">$<?php
                                                     echo $ingresos; ?></h5>
+                            <BR></BR>
                             <h6 class="card-subtitle mb-2 text-muted">Ingresos</h6>
                           </div>
                           <div class="col-sm-6"><img width="100" height="100" src="public/img/ingresos.png" alt="Ingresos anuales registrados"></div>
                         </div>
                       </div>
                     </div>
-
+                    <!--VISITAS DE TURISTAS-->
                     <div class="col-sm-4">
-                      <div class="card" style="width: 15rem;">
+                      <div class="card">
                         <div class="row card-body">
                           <div class="col-sm-6">
                             <h5 class="card-title"><?php echo $turismo; ?> visitas</h5>
+                            <BR></BR>
                             <h6 class="card-subtitle mb-2 text-muted">Turismo</h6>
                           </div>
                           <div class="col-sm-6"><img width="100" height="100" src="public/img/turismo.jpg" alt="Turismo en ocupación hotelera"></div>
                         </div>
                       </div>
                     </div>
-
+                    <!--PORCENTAJE DE OCUPACION HOTELERA-->
                     <div class="col-sm-4">
                       <div class="card" style="width: 15rem;">
                         <div class="row card-body">
                           <div class="col-sm-6">
-                            <h5 class="card-title"><?php echo $hotel; ?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Hotel más visitado</h6>
+                            <h5 class="card-title"><?php echo $porcentaje; ?>%</h5>
+                            <BR></BR>
+                            <h6 class="card-subtitle mb-2 text-muted">Porcentaje de ocupación</h6>
                           </div>
                           <div class="col-sm-6"><img width="100" height="100" src="public/img/favorito.png" alt="Hotel más visitado"></div>
                         </div>
@@ -257,22 +258,11 @@ $db = new DB();
 
                   </form>
                 </div>
-
-
-
               </div>
             </div>
-
-
-
-
           </div>
-
-
-
-
-
           <!--fin info del hotel-->
+
           <hr>
 
           <div id="graficas">
@@ -286,9 +276,9 @@ $db = new DB();
               <!-- Grafica Turismo/visitantes en champo-->
               <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
                 <div class="tabla card">
-
+                  <h1 class="ml-3 mt-3 card-title">TURISMO</h1>
                   <div>
-                    <h1 class="ml-3 mt-3 card-title">Turismo</h1>
+
 
                     <hr>
                     <div class="row">
@@ -297,7 +287,7 @@ $db = new DB();
                       </div>
                     </div>
                     <div class="card-footer">
-                      <small class="text-muted">Actividad turística comprende la cuantificación de las visitas, las cuales se dividen en visitantes de otros países o extranjeros, y los compatriotas.</small>
+                      <small class="text-muted">La actividad turística comprende la cuantificación de las visitas que obtuvo el hotel.</small>
                     </div>
 
 
@@ -420,9 +410,9 @@ $db = new DB();
               <!--Grafica visitas mensuales-->
               <div class="col-lg-6 col-md-6 .col-sm-12 .col-xs-12 ">
                 <div class="tabla card">
-
+                  <h1 class="ml-3 mt-3 card-title">PORCENTAJE DE OCUPACIÓN</h1>
                   <div>
-                    <h1 class="ml-3 mt-3 card-title">Ocupación</h1>
+
 
                     <hr>
                     <div class="row">
@@ -431,7 +421,7 @@ $db = new DB();
                       </div>
                     </div>
                     <div class="card-footer">
-                      <small class="text-muted">El porcentaje de ocupación que promedian nuestros hoteles de forma mensual</small>
+                      <small class="text-muted">El porcentaje de ocupación que promedia nuestro hotel de forma mensual</small>
                     </div>
 
 
@@ -515,10 +505,8 @@ $db = new DB();
             <div class="row">
               <div class="col-12">
                 <div class="tabla card">
-
+                  <h1 class="ml-3 mt-3 card-title">DERRAMA ECONÓMICA</h1>
                   <div>
-                    <h1 class="ml-3 mt-3 card-title">Derrama económica</h1>
-
                     <hr>
                     <div class="row">
                       <div class="resultados col-12">
@@ -528,15 +516,13 @@ $db = new DB();
                     <div class="card-footer">
                       <small class="text-muted">El concepto de la derrama económica motivada por la actividad turística comprende la cuantificación del valor monetario total promedio (en pesos corrientes), de los gastos que como mínimo son realizados por los visitantes con pernocta a los principales centros turísticos del Estado durante el periodo de análisis.</small>
                     </div>
-
-
                   </div>
 
                   <script>
                     var contexto = document.getElementById("grafico3").getContext("2d");
                     var grafico = new Chart(contexto, {
 
-                      type: "bar", //line,bar,pie,bubble,doughnut,polarArea
+                      type: "doughnut", //line,bar,pie,bubble,doughnut,polarArea
 
 
                       data: {
@@ -607,40 +593,12 @@ $db = new DB();
 
           </div>
 
-
-
-
-
+<!--TABLA DE REGISTRO DEL HOTEL SELECCIONADO-->
           <div id="tabla">
-
-            <!--TABLA DE REGISTRO DEL HOTEL SELECCIONADO-->
-
-            <h2>Tabla de registros</h2>
-
-            <header style="position:relative; z-index:1;">
-              <div class="text-center alert alert-info">
-                <h1 class="mt-2 mb-2">OCUPACIÓN HOTELERA</h1>
-              </div>
-            </header>
-
-            <!-- PRUEBA DE CONSULTA CON JQUERY-->
-            <form class="form-inline mt-4 mb-2 mr-0 txt-center container" method="POST">
-              <div class="row  col-10">
-                <div class="col-4 form-group">
-                  <label for="fecha_inicio">Fecha Inicio:</label>
-                  <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
-                </div>
-                <div class="col-4 form-group">
-                  <label for="fecha_final">Fecha Final:</label>
-                  <input type="date" class="form-control" id="fecha_final" name="fecha_final" required>
-                </div>
-
-
-              </div>
-            </form>
+<hr>
+            <h2>Tabla de registros <?php echo $hotel;   ?></h2>           
             <hr>
-            <!-- TABLAS -->
-
+          
             <section id="tabla_resultado" class="content">
               <div class="container-fluid">
                 <div class="row">
@@ -653,7 +611,7 @@ $db = new DB();
                       <div class="card-body">
                         <table id="datos" class="text-center table table-bordered table-hover table-responsive">
 
-
+                        <?php echo $salida; ?>
 
 
 
@@ -671,25 +629,6 @@ $db = new DB();
             </section>
 
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

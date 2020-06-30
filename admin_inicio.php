@@ -29,8 +29,8 @@ $db=new DB();
   <main>
 
     <div class="page-wrapper chiller-theme toggled">
-         <!--Sidebar-->
-         <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+   <!--Sidebar-->
+   <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
       </a>
       <nav id="sidebar" class="sidebar-wrapper">
@@ -77,7 +77,7 @@ $db=new DB();
                   <ul>
                     <li>
                       <?php
-                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
+                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
                       $sentencia->execute();
 
                       foreach ($sentencia as $row) {
@@ -85,15 +85,15 @@ $db=new DB();
                       ?>
                         <form class="text-center" action="buscar_id.php" method="POST">
 
-                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
+                          <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
-                                                                                                                if ($row[1] != 'Administrador') {
-                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+                                                                                                                      if ($row[0] != 'Administrador') {
+                                                                                                                      ?> value="<?php echo $row[0]; ?>"><?php
 
-                                                                                                                                                  } else {
-                                                                                                                                                    ?> style="display: none;" > <?php
-                                                                                                                                                                              }
-                                                                                                                                                                                ?></input>
+                                                                                                                                                      } else {
+                                                                                                                                                        ?> style="display: none;" > <?php
+                                                                                                                                                                                    }
+                                                                                                                                                                                      ?></input>
                         </form>
                       <?php
 

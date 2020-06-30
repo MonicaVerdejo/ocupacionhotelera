@@ -92,25 +92,23 @@ $db = new DB();
                   <ul>
                     <li>
                       <?php
-                      $sentencia = $db->connect()->prepare("SELECT id, usuario FROM usuario");
+                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
                       $sentencia->execute();
 
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <form class="text-center" action="buscarid.php" method="POST">
+                        <form class="text-center" action="buscar_id.php" method="POST">
 
-                          <input type="submit" class="btn btn-outline-info btn-sm mt-1 mb-1" name="id" id="id" <?php
+                          <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
-                                                                                                                if ($row[1] != 'Administrador') {
-                                                                                                                ?> value=" <?php echo $row[1]; ?>"><?php
+                                                                                                                      if ($row[0] != 'Administrador') {
+                                                                                                                      ?> value="<?php echo $row[0]; ?>"><?php
 
-                                                                                                                                                  } else {
-                                                                                                                                                    ?> style="display: none;" > <?php
-                                                                                                                                                                              }
-                                                                                                                                                                                ?></input type="submit">
-
-
+                                                                                                                                                      } else {
+                                                                                                                                                        ?> style="display: none;" > <?php
+                                                                                                                                                                                  }
+                                                                                                                                                                                    ?></input>
                         </form>
                       <?php
 
@@ -118,7 +116,6 @@ $db = new DB();
                       ?>
                     </li>
                   </ul>
-
 
                 </div>
               </li>
