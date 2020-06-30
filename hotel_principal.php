@@ -22,6 +22,8 @@ if (!isset($_SESSION['rol'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Site Icons -->
     <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+    <!--POPOVER-->
+
     <title>Hotel</title>
 
     <script type="text/javascript">
@@ -129,8 +131,13 @@ if (!isset($_SESSION['rol'])) {
                                 <div class="">
                                     <div id="cambiarp">
                                         <img width="20" height="20" src="public/img/editar.png" alt="">
-                                        <label for="file">Cambiar avatar</label>
+                                        <label for="file" title="ADVERTENCIA" data-toggle="popover" data-trigger="hover"  data-content="Coloca un logo o imagen representativa de tu hotel, esta imagen sera usada para fines administrativos.">Cambiar avatar</label>
                                     </div>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('[data-toggle="popover"]').popover();
+                                        });
+                                    </script>
                                     <!---->
                                     <form class="col-12" id="perfil" style="display:none;" action="upload.php" method="post" enctype="multipart/form-data">
 

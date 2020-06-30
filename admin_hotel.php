@@ -3,7 +3,15 @@ require_once 'db.php';
 
 $db = new DB();
 session_start();
+session_start();
 
+if (!isset($_SESSION['rol'])) {
+  header('location: index.php');
+} else {
+  if ($_SESSION['rol'] != 1) {
+    header('location: index.php');
+  }
+}
 
 if (isset($_POST['hotel'])) {
   $_SESSION['hotel'] = $_POST['hotel'];
