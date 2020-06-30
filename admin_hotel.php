@@ -1,7 +1,16 @@
 <?php
 require_once 'db.php';
-$db = new DB();
 
+$db = new DB();
+session_start();
+
+
+if (isset($_POST['hotel'])) {
+  $_SESSION['hotel'] = $_POST['hotel'];
+  //echo $_SESSION['hotel'];
+} else {
+  require 'buscar_id.php';
+}
 
 ?>
 <!DOCTYPE html>
@@ -156,7 +165,7 @@ $db = new DB();
               <div class="card">
                 <img class="card-img-top img-responsive" src="public/img_profile/<?php echo $imgPerfil; ?>" alt="Card image">
                 <div class="card-body">
-                  <h1 class="card-title"><?php echo  $_POST['hotel']; ?></h1>
+                  <h1 class="card-title"><?php echo  $hotel; ?></h1>
                   <p class="card-text">Hotel</p>
                   <p class="card-text"><?php echo $correo; ?></p>
                 </div>
@@ -233,10 +242,10 @@ $db = new DB();
                     </div>
                   </div>
                 </div>
-
+                <!--Formulario fecha de graficacion-->
                 <div class="col-sm-12 col-lg-12 mt-5">
-                  <!--Formulario fecha de graficacion-->
-                  <form class="form-inline" action="buscarid.php" method="POST">
+
+                  <form class="form-inline" action="buscar_id.php" method="POST">
                     <small id="passwordHelpInline" class="text-muted ml-2">
                       Escoja el año que desea graficar.
                     </small>
@@ -245,7 +254,7 @@ $db = new DB();
                       <select id="year" class="" name="year">
                         <?php
                         for ($i = 2016; $i < 2023; $i++) {
-                          if ($i == 2016) {
+                          if ($i == 2019) {
                             echo '<option value="' . $i . '" selected>' . $i . '</option>';
                           } else {
                             echo '<option value="' . $i . '" >' . $i . '</option>';
@@ -314,18 +323,18 @@ $db = new DB();
                           hoverBackgroundColor: '#c9effc',
                           hoverBorderColor: 'black',
                           backgroundColor: [
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)',
-                            'rgba(247, 248, 248, 0.55)'
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)',
+                            'rgba(151, 219, 242, 0.55)'
 
                           ],
                           borderColor: [
@@ -593,12 +602,12 @@ $db = new DB();
 
           </div>
 
-<!--TABLA DE REGISTRO DEL HOTEL SELECCIONADO-->
+          <!--TABLA DE REGISTRO DEL HOTEL SELECCIONADO-->
           <div id="tabla">
-<hr>
-            <h2>Tabla de registros <?php echo $hotel;   ?></h2>           
             <hr>
-          
+            <h2>Tabla de registros <?php echo $hotel;   ?></h2>
+            <hr>
+
             <section id="tabla_resultado" class="content">
               <div class="container-fluid">
                 <div class="row">
@@ -611,7 +620,7 @@ $db = new DB();
                       <div class="card-body">
                         <table id="datos" class="text-center table table-bordered table-hover table-responsive">
 
-                        <?php echo $salida; ?>
+                          <?php echo $salida; ?>
 
 
 

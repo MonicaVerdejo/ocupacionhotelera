@@ -161,7 +161,7 @@ $db = new DB();
                   <select id="year" class="form-control" name="year">
                     <?php
                     for ($i = 2016; $i < 2023; $i++) {
-                      if ($i == 2016) {
+                      if ($i == 2019) {
                         echo '<option value="' . $i . '" selected>' . $i . '</option>';
                       } else {
                         echo '<option value="' . $i . '" >' . $i . '</option>';

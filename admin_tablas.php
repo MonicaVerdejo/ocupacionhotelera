@@ -177,36 +177,38 @@ $db = new DB();
           </form>
 
           <!-- TABLAS -->
+          <div class="container">
 
-          <section id="tabla_resultado" class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-12">
-                  <div class="card">
-                    <div class="card-header">
-                      <h3 class="card-title text-center">ESTADÍSTICA DE LA OCUPACIÓN HOTELERA</h3>
+            <section id="tabla_resultado" class="content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 ">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title text-center">ESTADÍSTICA DE LA OCUPACIÓN HOTELERA</h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <table id="datos" class="text-center table table-bordered table-hover table-responsive">
+
+
+
+
+
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                      <table id="datos" class="text-center table table-bordered table-hover table-responsive">
-
-
-
-
-
-                      </table>
-                    </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                   </div>
-                  <!-- /.card -->
+                  <!-- /.col -->
                 </div>
-                <!-- /.col -->
+                <!-- /.row -->
               </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-          </section>
+              <!-- /.container-fluid -->
+            </section>
 
+          </div>
 
 
 
