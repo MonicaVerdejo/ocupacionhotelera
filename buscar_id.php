@@ -14,10 +14,9 @@ if (!empty($_POST['hotel'])) {
   //echo $hotel;
 }
 
+$porcentajeCero = 0;
 
 //asociar el hotel con la id para hacer consultas mas sencillas
-
-
 $sentencia = $db->connect()->prepare("SELECT * from usuario where usuario =:usuario");
 $sentencia->bindParam(':usuario', $hotel);
 $sentencia->execute();
@@ -44,7 +43,13 @@ $turismo = $row2['turismo'] ?? 'Turistas';
 $stmt = $db->connect()->prepare("SELECT habitaciones_ocupadas,dias_vacaciones,num_habitaciones FROM registro where YEAR(fecha_inicio)='$año' and hotel ='$hotel'");
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-$porcentaje = round((($row['habitaciones_ocupadas'] / $row['dias_vacaciones'] / $row['num_habitaciones']) * 100), 3);
+if(!empty($row)){
+  $porcentaje = round((($row['habitaciones_ocupadas'] / $row['dias_vacaciones'] / $row['num_habitaciones']) * 100), 3) ?? $porcentajeCero;
+}else{
+  $porcentaje = 0;
+}
+  
+
 
 
 ///////////////////////////////FOTO DE PERFIL DE CADA HOTEL //////////////////////////////////
@@ -219,9 +224,6 @@ $n1 = $data[10];
 $d1 = $data[11];
 
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////GRAFICA DE VISITAS PARTE DOS////////////////////////////////////////////////// 
 $sentencia = $db->connect()->prepare("SELECT SUM(personas_extranjeras)  AS r FROM registro WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año' AND hotel ='$hotel'");
@@ -274,18 +276,18 @@ $diciembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
 
 $data = array(
-  0 => round($enero['r'], 1),
-  1 => round($febrero['r'], 1),
-  2 => round($marzo['r'], 1),
-  3 => round($abril['r'], 1),
-  4 => round($mayo['r'], 1),
-  5 => round($junio['r'], 1),
-  6 => round($julio['r'], 1),
-  7 => round($agosto['r'], 1),
-  8 => round($septiembre['r'], 1),
-  9 => round($octubre['r'], 1),
-  10 => round($noviembre['r'], 1),
-  11 => round($diciembre['r'], 1)
+  0 => round($enero['r'] ?? $porcentajeCero, 1),
+  1 => round($febrero['r'] ?? $porcentajeCero, 1),
+  2 => round($marzo['r'] ?? $porcentajeCero, 1),
+  3 => round($abril['r'] ?? $porcentajeCero, 1),
+  4 => round($mayo['r'] ?? $porcentajeCero, 1),
+  5 => round($junio['r'] ?? $porcentajeCero, 1),
+  6 => round($julio['r'] ?? $porcentajeCero, 1),
+  7 => round($agosto['r'] ?? $porcentajeCero, 1),
+  8 => round($septiembre['r'] ?? $porcentajeCero, 1),
+  9 => round($octubre['r'] ?? $porcentajeCero, 1),
+  10 => round($noviembre['r'] ?? $porcentajeCero, 1),
+  11 => round($diciembre['r'] ?? $porcentajeCero, 1)
 );
 
 $e2 = $data[0];
@@ -356,19 +358,20 @@ $sentencia->execute();
 $diciembre = $sentencia->fetch(PDO::FETCH_ASSOC);
 
 
+
 $data = array(
-  0 => round($enero['r'], 1),
-  1 => round($febrero['r'], 1),
-  2 => round($marzo['r'], 1),
-  3 => round($abril['r'], 1),
-  4 => round($mayo['r'], 1),
-  5 => round($junio['r'], 1),
-  6 => round($julio['r'], 1),
-  7 => round($agosto['r'], 1),
-  8 => round($septiembre['r'], 1),
-  9 => round($octubre['r'], 1),
-  10 => round($noviembre['r'], 1),
-  11 => round($diciembre['r'], 1)
+  0 => round($enero['r'] ?? $porcentajeCero, 1),
+  1 => round($febrero['r'] ?? $porcentajeCero, 1),
+  2 => round($marzo['r'] ?? $porcentajeCero, 1),
+  3 => round($abril['r'] ?? $porcentajeCero, 1),
+  4 => round($mayo['r'] ?? $porcentajeCero, 1),
+  5 => round($junio['r'] ?? $porcentajeCero, 1),
+  6 => round($julio['r'] ?? $porcentajeCero, 1),
+  7 => round($agosto['r'] ?? $porcentajeCero, 1),
+  8 => round($septiembre['r'] ?? $porcentajeCero, 1),
+  9 => round($octubre['r'] ?? $porcentajeCero, 1),
+  10 => round($noviembre['r'] ?? $porcentajeCero, 1),
+  11 => round($diciembre['r'] ?? $porcentajeCero, 1)
 );
 
 $e3 = $data[0];
@@ -461,16 +464,5 @@ if ($sentencia->rowCount() > 0) {
 } else {
   $salida .= "No existen coincidencias";
 }
-
-
-
-
-
-
-
-
-
-
-
 
 require_once 'admin_hotel.php';

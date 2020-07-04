@@ -5,36 +5,34 @@ $db = new DB();
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-  header('location: index.php');
-} else {
-  if ($_SESSION['rol'] != 1) {
     header('location: index.php');
-  }
+} else {
+    if ($_SESSION['rol'] != 1) {
+        header('location: index.php');
+    }
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <title>Administrador</title>
-    <link rel="stylesheet" href="public/css/styles20.css">
-    <link rel="stylesheet" href="public/css/styles21.css">
-    <link rel="stylesheet" href="public/css/tablas.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <!-- Site Icons -->
     <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+    <link rel="stylesheet" href="public/css/styles20.css" type="text/css">
+    <link rel="stylesheet" href="public/css/styles21.css" type="text/css">
+    <link rel="stylesheet" href="public/css/tablas.css" type="text/css">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" type="text/css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css"  type="text/css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"  type="text/css">
+    
+    <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    
     <style>
         #signup {
             padding: 0px 25px 25px;
@@ -59,12 +57,10 @@ if (!isset($_SESSION['rol'])) {
         }
     </style>
 
-
 </head>
 
 <body>
     <main>
-
 
         <div class="page-wrapper chiller-theme toggled">
               <!--Sidebar-->
@@ -114,29 +110,29 @@ if (!isset($_SESSION['rol'])) {
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <?php
-                      $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
-                      $sentencia->execute();
+<?php
+$sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
+$sentencia->execute();
 
-                      foreach ($sentencia as $row) {
+foreach ($sentencia as $row) {
 
-                      ?>
-                        <form class="text-center" action="buscar_id.php" method="POST">
+?>
+    <form class="text-center" action="buscar_id.php" method="POST">
+    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
-                          <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
+    if ($row[0] != 'Administrador') {
+        ?> value="<?php echo $row[0]; ?>"><?php
 
-                                                                                                                      if ($row[0] != 'Administrador') {
-                                                                                                                      ?> value="<?php echo $row[0]; ?>"><?php
-
-                                                                                                                                                      } else {
-                                                                                                                                                        ?> style="display: none;" > <?php
-                                                                                                                                                                                    }
-                                                                                                                                                                                      ?></input>
+    } else {
+        ?> style="display: none;" > <?php
+}
+    ?>
+    </input>
                         </form>
                       <?php
 
-                      }
-                      ?>
+}
+?>
                     </li>
                   </ul>
 
@@ -191,7 +187,7 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                                 <div class="col-4 text-center" id="deletep">
                                     <h4>Cambiar <br> contraseña</h4>
-                                    <a href="#" id="cambiar"><img style="position: relative;" width="70" height="70" src="public/img/contraseña3.png" alt="Visualizar contraseña de usuario"></a>
+                                    <a href="#" id="cambiar"><img style="position: relative;" width="70" height="60" src="public/img/contraseña3.png" alt="Visualizar contraseña de usuario" class="mt-2"></a>
                                 </div>
                             </div>
                             <!--Registra usuario-->
@@ -272,7 +268,7 @@ if (!isset($_SESSION['rol'])) {
                             <div>
                                 <h4>Becarios registrados</h4>
 
-                                <table class=" mt-5" align="center" border="1">
+                                <table class="mt-5" align="center" border="1">
 
                                     <tr class="bg-dark text-white">
                                         <th colspan="3">Usuarios</th>
@@ -284,28 +280,20 @@ if (!isset($_SESSION['rol'])) {
 
                                     </tr>
 
-                                    <?php
+<?php
+$sentencia = $db->connect()->prepare("SELECT nombres, apellidos, correo FROM becario");
+$sentencia->execute();
 
-                                    $sentencia = $db->connect()->prepare("SELECT nombres, apellidos, correo FROM becario");
-                                    $sentencia->execute();
-
-                                    foreach ($sentencia as $row) {
-
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $row[0]; ?></td>
-                                            <td><?php echo $row[1]; ?></td>
-                                            <td><?php echo $row[2]; ?></td>
-
-
-
-
-                                        </tr>
-                                    <?php
-                                    }
-
-
-                                    ?>
+foreach ($sentencia as $row) {
+?>
+   <tr>
+       <td><?php echo $row[0]; ?></td>
+       <td><?php echo $row[1]; ?></td>
+       <td><?php echo $row[2]; ?></td>
+    </tr>
+<?php
+}
+?>
 
                                 </table>
                             </div>
@@ -317,13 +305,13 @@ if (!isset($_SESSION['rol'])) {
 
             </main>
             <!-- page-content" -->
-            <!-- page-content" -->
+          
         </div>
         <!-- page-wrapper -->
         </div>
 
     </main>
-    <script src="public/js/jquery-3.2.1.min.js"></script>
+   
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -353,18 +341,12 @@ if (!isset($_SESSION['rol'])) {
         });
     </script>
 
+<script src="public/js/js.js" type="text/javascript"></script>
+<script src="public/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="public/js//popper.min.js" type="text/javascript"></script>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
 </body>
 
-
-
 </html>
-
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
-<script id="rendered-js" src="public/js/js.js"></script>

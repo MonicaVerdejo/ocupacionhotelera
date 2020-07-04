@@ -12,40 +12,38 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <title>Administrador</title>
-  <link rel="stylesheet" href="public/css/styles20.css">
-  <link rel="stylesheet" href="public/css/styles21.css">
-  <link rel="stylesheet" href="public/css/tablas.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="public/css/bootstrap.min.css">
-  <!-- Site Icons -->
   <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
+  <link rel="stylesheet" href="public/css/styles20.css" type="text/css">
+  <link rel="stylesheet" href="public/css/styles21.css" type="text/css">
+  <link rel="stylesheet" href="public/css/tablas.css" type="text/css">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'  type="text/css">
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="public/TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="public/TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="public/TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" type="text/css">
+  <link rel="stylesheet" href="public/TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css" type="text/css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" type="text/css">
+
+  <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
   <style>
     body {
       background-color: #ededed;
     }
   </style>
+
 </head>
 
 <body>
   <main>
-
 
     <div class="page-wrapper chiller-theme toggled">
       <!--Sidebar-->
@@ -115,7 +113,6 @@ if (!isset($_SESSION['rol'])) {
                                                                                                                                                                                     ?></input>
                         </form>
                       <?php
-
                       }
                       ?>
                     </li>
@@ -202,7 +199,6 @@ if (!isset($_SESSION['rol'])) {
 
 
 
-
                         </table>
                       </div>
                       <!-- /.card-body -->
@@ -230,36 +226,21 @@ if (!isset($_SESSION['rol'])) {
     </div>
 
   </main>
-  <script src="public/js/jquery-3.2.1.min.js"></script>
-  <script src="public/js/buscar_datos.js"></script>
-  <script src="public/js/buscar_fechas.js"></script>
 
-</body>
-
-
-
-</html>
-
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
-<script id="rendered-js" src="public/js/js.js"></script>
-
-<!-- jQuery -->
-<script src="public/TABLA/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="public/TABLA/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="public/TABLA/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="public/TABLA/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="public/TABLA/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="public/TABLA/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script>
+  <script src="public/js/buscar_datos.js" type="text/javascript"></script>
+  <script src="public/js/buscar_fechas.js" type="text/javascript"></script>
+  <script src="public/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="public/js//popper.min.js" type="text/javascript"></script>
+  <script src="public/js/js.js" type="text/javascript"></script>
+  <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
+  <!-- DataTables -->
+  <script src="public/TABLA/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+  <script src="public/TABLA/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+  <script src="public/TABLA/plugins/datatables-responsive/js/dataTables.responsive.min.js" type="text/javascript"></script>
+  <script src="public/TABLA/plugins/datatables-responsive/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  
+ <script>
   $(function() {
     $("#example1").DataTable({
       "responsive": true,
@@ -276,3 +257,13 @@ if (!isset($_SESSION['rol'])) {
     });
   });
 </script>
+
+</body>
+
+</html>
+
+
+
+
+
+

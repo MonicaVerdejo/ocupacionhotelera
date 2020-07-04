@@ -13,26 +13,28 @@ if (!isset($_SESSION['rol'])) {
 $db = new DB();
 ?>
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <title>Administrador</title>
-  <link rel="stylesheet" href="public/css/styles20.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-  <!-- Site Icons -->
   <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
-<!-- Theme style -->
-<link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="public/css/styles20.css" type="text/css">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" type="text/css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css" type="text/css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" type="text/css">
+
+  <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
   <style>
     body {
       background-color: #ededed;
     }
   </style>
+
 </head>
 
 <body>
@@ -94,19 +96,18 @@ $db = new DB();
 
                       ?>
                         <form class="text-center" action="buscar_id.php" method="POST">
-
                           <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
                                                                                                                       if ($row[0] != 'Administrador') {
                                                                                                                       ?> value="<?php echo $row[0]; ?>"><?php
-
-                                                                                                                                                      } else {
-                                                                                                                                                        ?> style="display: none;" > <?php
-                                                                                                                                                                                  }
-                                                                                                                                                                                    ?></input>
+                                                                                                                      }else {
+                                                                                                                            ?> style="display: none;" > 
+                                                                                                                            <?php        
+                                                                                                                            }
+                                                                                                                            ?>
+                          </input>
                         </form>
                       <?php
-
                       }
                       ?>
                     </li>
@@ -215,7 +216,7 @@ $db = new DB();
                   <div class="row">
                     <div class="col-12">
                       <div class="card">
-                        <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Status entrega de reporte </h3>
+                        <h3 class="ml-3 mt-3 card-title "><img src="public/img/check-circle.svg" height="50" width="50"> Estatus de entrega de reportes</h3>
                         <hr>
 
                         <div class="row">
@@ -256,17 +257,15 @@ $db = new DB();
     </div>
     </div>
     </div>
-    <!-- page-wrapper -->
+
   </main>
-  <script src="public/js/jquery-3.2.1.min.js"></script>
-  <script src="public/js/buscar_registro_mensual.js"></script>
+
+  <script src="public/js/js.js" type="text/javascript"></script>
+  <script src="public/js/buscar_registro_mensual.js" type="text/javascript"></script>
+  <script src="public/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="public/js//popper.min.js" type="text/javascript"></script>
+  <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
 
 </body>
-
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
-<script id="rendered-js" src="public/js/js.js"></script>
 
 </html>

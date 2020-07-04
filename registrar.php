@@ -5,11 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,  initial-scale=1.0">
   <title>Inicio</title>
+  <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
   <link rel="stylesheet" href="public/css/styles2.css">
   <link rel="stylesheet" href="public/css/respon.css">
-
-  <!-- Site Icons -->
-  <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
 
 </head>
 
@@ -28,7 +26,7 @@
       <form action="" method="post">
 
         <div class="user">
-          <input type="text" name="usuario" id="usuario" placeholder="Hotel">
+          <input type="text" name="usuario" id="usuario" placeholder="Hotel" required>
         </div>
 
         <div class="hoteles">

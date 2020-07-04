@@ -79,11 +79,11 @@ if (isset($_POST['correo']) && isset($_POST['password'])) {
 
       <form id="signup" action="#" method="post">
         <div class="user">
-          <input type="text" name="correo" id="correo" placeholder="Correo">
+          <input type="text" name="correo" id="correo" placeholder="Correo" required>
         </div>
 
         <div class="pass">
-          <input type="password" name="password" id="password" placeholder="Contraseña">
+          <input type="password" name="password" id="password" placeholder="Contraseña" required>
         </div>
 
         <div class="recu">

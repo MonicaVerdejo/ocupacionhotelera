@@ -1,9 +1,8 @@
 <?php
+ob_start();
 require_once 'db.php';
-
 $db = new DB();
 session_start();
-
 
 if (!isset($_SESSION['rol'])) {
   header('location: index.php');
@@ -19,38 +18,33 @@ if (isset($_POST['hotel'])) {
 } else {
   require 'buscar_id.php';
 }
-
+ob_flush();
 ?>
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <title>Administrador</title>
-  <link rel="stylesheet" href="public/css/styles20.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <!-- Site Icons -->
   <link rel="shortcut icon" href="public/img/cropped-logom3-1.png" type="image/x-icon">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-  <script src="Chartjs/Chart.min.js"></script>
-  <link rel="stylesheet" href="public/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/css/styles20.css" type="text/css">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" type="text/css">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css"> 
   <!-- Theme style -->
-  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="public/TABLA/dist/css/adminlte.min.css" type="text/css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"  type="text/css">
   <!--Chartjs-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-  <script src="Chartjs/Chart.min.js"></script>
+  <script src="Chartjs/Chart.min.js" type="text/javascript"></script>
+  <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
   <style>
     body {
       background-color: #ededed;
     }
   </style>
+
 </head>
 
 <body>
@@ -111,18 +105,18 @@ if (isset($_POST['hotel'])) {
                       foreach ($sentencia as $row) {
 
                       ?>
-                        <form class="text-center" action="buscar_id.php" method="POST">
+                           <form class="text-center" action="buscar_id.php" method="POST">
 
-                          <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
+                            <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
 
-                                                                                                                      if ($row[0] != 'Administrador') {
-                                                                                                                      ?> value="<?php echo $row[0]; ?>"><?php
+                                                                                            if ($row[0] != 'Administrador') {
+                                                                                            ?> value="<?php echo $row[0]; ?>"><?php
 
-                                                                                                                                                      } else {
-                                                                                                                                                        ?> style="display: none;" > <?php
-                                                                                                                                                                                  }
-                                                                                                                                                                                    ?></input>
-                        </form>
+                                                                                                                            } else {
+                                                                                                                              ?> style="display: none;" > <?php
+                                                                                                                                                        }
+                                                                                                                                                          ?></input>
+                              </form>
                       <?php
 
                       }
@@ -663,12 +657,11 @@ if (isset($_POST['hotel'])) {
   <!-- page-wrapper -->
   </main>
 </body>
-<script src="public/js/buscar_idfetch.js"></script>
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
-<script id="rendered-js" src="public/js/js.js"></script>
-<script src="js/main.js"></script>
+
+<script src="public/js/buscar_idfetch.js" type="text/javascript"></script>
+<script src="public/js/js.js" type="text/javascript"></script>
+<script src="public/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="public/js//popper.min.js" type="text/javascript"></script>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
 
 </html>
