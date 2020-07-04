@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2020 a las 07:10:50
+-- Tiempo de generación: 04-07-2020 a las 07:37:40
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -51,16 +51,16 @@ INSERT INTO `becario` (`id`, `nombres`, `apellidos`, `correo`, `password`) VALUE
 
 CREATE TABLE `registro` (
   `id` int(11) NOT NULL,
-  `hotel` varchar(250) DEFAULT NULL,
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `habitaciones_ocupadas` int(11) DEFAULT NULL,
-  `personas_extranjeras` int(11) DEFAULT NULL,
-  `personas_nacionales` int(11) DEFAULT NULL,
-  `dias_vacaciones` int(11) DEFAULT NULL,
-  `num_habitaciones` int(11) DEFAULT NULL,
-  `costo_hotel` decimal(60,2) DEFAULT NULL,
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `hotel` varchar(250) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `habitaciones_ocupadas` int(11) NOT NULL,
+  `personas_extranjeras` int(11) NOT NULL,
+  `personas_nacionales` int(11) NOT NULL,
+  `dias_vacaciones` int(11) NOT NULL,
+  `num_habitaciones` int(11) NOT NULL,
+  `costo_hotel` decimal(60,2) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -219,12 +219,12 @@ INSERT INTO `roles` (`id`, `rol`) VALUES
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `usuario` varchar(100) DEFAULT NULL,
-  `correo` varchar(100) DEFAULT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  `Token` varchar(60) DEFAULT NULL,
-  `rol_id` int(11) DEFAULT NULL,
-  `imagen_profile` varchar(100) DEFAULT NULL
+  `usuario` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `Token` varchar(60) NOT NULL,
+  `rol_id` int(11) NOT NULL,
+  `imagen_profile` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -232,19 +232,19 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `usuario`, `correo`, `password`, `Token`, `rol_id`, `imagen_profile`) VALUES
-(1, 'Hotel venecia', 'esdeath97@yopmail.com', '$2y$10$DEZzWS8uW3oZS/N.cMifFu24yz/IuTMpI2cksgGNHeoEk1zizxevW', NULL, 2, 'patron-pokemon-amigurumi-1.jpg'),
-(2, 'Aaktun kay', 'ash@yopmail.com', '$2y$10$bEJFg9CsgUoLylDIyY9vcOW8Jx90zpSMJkoAlFswXlZDh3W2p8852', NULL, 2, 'aaktunkay.png'),
-(3, 'Administrador', 'verdejo97@outlook.com', '$2y$10$z4dNQ.hY1yGUmVf34zKSmuKMuHLq3DuWxIGgA.o4jCqX1erS2ZxZe', NULL, 1, 'defecto.png'),
-(4, 'Luna', 'luna@outlook.com', '$2y$10$gMSFVNjNJxDKsg74Aa3m7uPmlDnijrNuD/SOW0wVcMf7qdIch1WJe', NULL, 2, 'defecto.png'),
-(5, 'Don Abel', 'donAbel@outlook.com', '$2y$10$vsvdMnYkp3eetII5EyfhhOmBTv0k3kRLTH9FQgtZmGTS/Rjjyn/j2', NULL, 2, 'defecto.png'),
-(6, 'Atardecer Bahia', 'atardecerBahia@outlook.com', '$2y$10$c.B1NRjsp8Us47UE1YWL/u80PDr8cwxU9K8h4o2xkqRvpTBEXBBUm', NULL, 2, 'defecto.png'),
-(7, 'Posada Maya', 'posadaMaya@outlook.com', '$2y$10$ZJ38OFK4q7gWn46vWSTY5uWiL6g/WImms6W6XIOMfBCy.4JYZG.j2', NULL, 2, 'defecto.png'),
-(8, 'Las Flores', 'lasFlores@outlook.com', '$2y$10$NBkdwbs/tmgmyZ4ByYaR..Vssyb3kopWH/I7F/fnzQNASErLUMlFa', NULL, 2, 'defecto.png'),
-(9, 'Lua Hotel', 'lua@outlook.com', '$2y$10$Xr4NVVRIDWQkOZrNMu8jgeEBnwzmehd9.CsmsTDveODpxfy5//l0.', NULL, 2, 'defecto.png'),
-(10, 'La Regia', 'laRegia@outlook.com', '$2y$10$HIsROgjnTOg28FwbRXQ6XuUlKzG1OZ3oHLNcR.C4hZpvJO6aBY2Q6', NULL, 2, 'defecto.png'),
-(11, 'Ranchobubiña', 'ranchoB@outlook.com', '$2y$10$LNWsZHAVom6.Hu8y.2ntYOyVyOpoNmmow5PI4v8TmTCz.BvJMV0.2', NULL, 2, 'defecto.png'),
-(12, 'Paraiso Beach', 'paraisoB@outlook.com', '$2y$10$Mve3ME59f60NokFH/OeOhu8hw6tDKnHw/7moRBiZtsOQOuMF0OhE6', NULL, 2, 'defecto.png'),
-(13, 'Geminis', 'geminis@outlook.com', '$2y$10$VXKy3pcLR.pHqyR3wTjo3O3pdcqXq/43KFfua4bYkG9jWPUn6ZFfW', NULL, 2, 'defecto.png');
+(1, 'Hotel venecia', 'esdeath97@yopmail.com', '$2y$10$DEZzWS8uW3oZS/N.cMifFu24yz/IuTMpI2cksgGNHeoEk1zizxevW', '', 2, 'patron-pokemon-amigurumi-1.jpg'),
+(2, 'Aaktun kay', 'ash@yopmail.com', '$2y$10$bEJFg9CsgUoLylDIyY9vcOW8Jx90zpSMJkoAlFswXlZDh3W2p8852', '', 2, 'aaktunkay.png'),
+(3, 'Administrador', 'verdejo97@outlook.com', '$2y$10$z4dNQ.hY1yGUmVf34zKSmuKMuHLq3DuWxIGgA.o4jCqX1erS2ZxZe', '', 1, 'defecto.png'),
+(4, 'Luna', 'luna@outlook.com', '$2y$10$gMSFVNjNJxDKsg74Aa3m7uPmlDnijrNuD/SOW0wVcMf7qdIch1WJe', '', 2, 'defecto.png'),
+(5, 'Don Abel', 'donAbel@outlook.com', '$2y$10$vsvdMnYkp3eetII5EyfhhOmBTv0k3kRLTH9FQgtZmGTS/Rjjyn/j2', '', 2, 'defecto.png'),
+(6, 'Atardecer Bahia', 'atardecerBahia@outlook.com', '$2y$10$c.B1NRjsp8Us47UE1YWL/u80PDr8cwxU9K8h4o2xkqRvpTBEXBBUm', '', 2, 'defecto.png'),
+(7, 'Posada Maya', 'posadaMaya@outlook.com', '$2y$10$ZJ38OFK4q7gWn46vWSTY5uWiL6g/WImms6W6XIOMfBCy.4JYZG.j2', '', 2, 'defecto.png'),
+(8, 'Las Flores', 'lasFlores@outlook.com', '$2y$10$NBkdwbs/tmgmyZ4ByYaR..Vssyb3kopWH/I7F/fnzQNASErLUMlFa', '', 2, 'defecto.png'),
+(9, 'Lua Hotel', 'lua@outlook.com', '$2y$10$Xr4NVVRIDWQkOZrNMu8jgeEBnwzmehd9.CsmsTDveODpxfy5//l0.', '', 2, 'defecto.png'),
+(10, 'La Regia', 'laRegia@outlook.com', '$2y$10$HIsROgjnTOg28FwbRXQ6XuUlKzG1OZ3oHLNcR.C4hZpvJO6aBY2Q6', '', 2, 'defecto.png'),
+(11, 'Ranchobubiña', 'ranchoB@outlook.com', '$2y$10$LNWsZHAVom6.Hu8y.2ntYOyVyOpoNmmow5PI4v8TmTCz.BvJMV0.2', '', 2, 'defecto.png'),
+(12, 'Paraiso Beach', 'paraisoB@outlook.com', '$2y$10$Mve3ME59f60NokFH/OeOhu8hw6tDKnHw/7moRBiZtsOQOuMF0OhE6', '', 2, 'defecto.png'),
+(13, 'Geminis', 'geminis@outlook.com', '$2y$10$VXKy3pcLR.pHqyR3wTjo3O3pdcqXq/43KFfua4bYkG9jWPUn6ZFfW', '', 2, 'defecto.png');
 
 --
 -- Índices para tablas volcadas
