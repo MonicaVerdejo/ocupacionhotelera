@@ -20,8 +20,9 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="public/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="public/css/styles10.css">
     <link rel="stylesheet" href="public/css/respon2.css">
-    <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     <title>Hotel</title>
 
     <script type="text/javascript">
@@ -90,7 +91,7 @@ if (!isset($_SESSION['rol'])) {
                                         <input type="text" class="form-control" name="persNacion" placeholder="Numero de personas nacionales" value="" required />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Días de vacaciones" value="" name="diasVacaciones"/>
+                                        <input type="text" class="form-control" placeholder="Días de vacaciones" value="" name="diasVacaciones" />
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="numHabitaciones" class="form-control" placeholder="Numero de habitaciones" value="" required />
@@ -130,7 +131,7 @@ if (!isset($_SESSION['rol'])) {
                                 <div class="">
                                     <div id="cambiarp">
                                         <img width="20" height="20" src="public/img/editar.png" alt="">
-                                        <label for="file" title="ADVERTENCIA" data-toggle="popover" data-trigger="hover"  data-content="Coloca un logo o imagen representativa de tu hotel, esta imagen sera usada para fines administrativos.">Cambiar avatar</label>
+                                        <label for="file" title="ADVERTENCIA" data-toggle="popover" data-trigger="hover" data-content="Coloca un logo o imagen representativa de tu hotel, esta imagen sera usada para fines administrativos.">Cambiar avatar</label>
                                     </div>
                                     <script>
                                         $(document).ready(function() {
@@ -162,9 +163,9 @@ if (!isset($_SESSION['rol'])) {
         </div>
     </div>
     </div>
-
-    <script src="public/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="public/js//popper.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 
