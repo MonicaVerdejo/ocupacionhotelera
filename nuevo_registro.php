@@ -19,11 +19,11 @@ if (isset($_POST['hotel'])){
     personas_nacionales,dias_vacaciones,num_habitaciones,costo_hotel) VALUES('$usuario', '$inicioFecha', '$finFecha' ,'$habOcupadas',
     '$persExtranjeras','$persNacion', '$diasVacaciones', '$numHabitaciones', '$costoHotel')");
 
-
-    $sentencia->execute();
-    $registro = "correcto";
-    echo json_encode(array("estado" => $registro));
-
+    if($sentencia->execute()){
+        $registro = "correcto";
+        echo json_encode(array("estado" => $registro));
+    }
+  
     header('Location: hotel_principal.php');
 } else {
     echo 'no esta imprimiendo';
